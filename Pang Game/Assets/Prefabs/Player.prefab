@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 8284181599844640641}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -2.35, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 1, z: 1}
   m_Children:
   - {fileID: 8284181600112381429}
   m_Father: {fileID: 0}
@@ -46,10 +46,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 0.2
-  m_LinearDrag: 1
+  m_Mass: 0.1
+  m_LinearDrag: 2
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 2
   m_Material: {fileID: 6200000, guid: 2f7823060e313b549808fbb3557d4d43, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -67,8 +67,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8118044b79daaa342921ac0bc9db62f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 8
-  maxVelocity: 10
+  speed: 5
+  maxVelocity: 5
 --- !u!61 &8284181599844640703
 BoxCollider2D:
   m_ObjectHideFlags: 0
