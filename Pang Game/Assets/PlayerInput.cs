@@ -5,26 +5,22 @@ public class PlayerInput : MonoBehaviour
 {
     // init player vars
     [SerializeField] Vector2 XYMovement;
+    private Vector2 newInput;
 
-    [SerializeField] Rigidbody2D m_Rigidbody;
+    void Start() => InitVars();
 
-    private bool b_canMove, b_canShoot;
-
-    // Start is called before the first frame update
-    void Start()
+    void InitVars()
     {
-        InitVars();
+        XYMovement = Vector2.zero;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-    }
+        float xMove = Input.GetAxis("Horizontal");
+        float yMove = Input.GetAxis("Vertical");
 
-    void InitVars()
-    {
-        b_canMove = true;
-        b_canShoot = true;
+        newInput = new Vector2(xMove, yMove);
+        XYMovement = newInput;
     }
 }
