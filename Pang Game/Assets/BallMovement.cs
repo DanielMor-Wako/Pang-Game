@@ -7,8 +7,7 @@ public class BallMovement : MonoBehaviour
     public Rigidbody2D m_Rigidbody;
     public Vector2 speed;
 
-    [Range(-1, 1)]
-    public int xDirection;
+    [Range(-1, 1)] [SerializeField] private int xDirection;
 
     void Awake() => InitVars();
 
@@ -24,7 +23,12 @@ public class BallMovement : MonoBehaviour
 
         SetBallSpeed();
     }
-    
+
+    public void SetBallxDirection(int newDirection)
+    {
+        xDirection = newDirection;
+    }
+
     void SetBallSpeed()
     {
         // sets ball speed on initilization
@@ -83,13 +87,9 @@ public class BallMovement : MonoBehaviour
         if (coll.tag == "Ground")
             m_Rigidbody.velocity = new Vector2(0, speed.y);
         else if (coll.tag == "WallRight")
-        {
             xDirection = -1;
-        }
         else if (coll.tag == "WallLeft")
-        {
             xDirection = 1;
-        }
         else if (coll.tag == "Ceil")
             m_Rigidbody.velocity = Vector2.zero;
     }
