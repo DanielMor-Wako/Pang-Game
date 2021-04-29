@@ -50,11 +50,24 @@ public class CharacterController2D : MonoBehaviour
             if (move.x != 0)
             {
                 // if player has not reached max speed, and can still move
-                // move on x Axis based on keyboard input
+                // move on x Axis based on keyboard input (-1 = left, 1 = right)
                 if (velocity < maxVelocity)
                     force = speed * Mathf.Sign(move.x);
+
+                // changing player x scale to face left or right
+                FlipCharacter(Mathf.Sign(move.x));
             }
         }
+    }
 
+    // flips character horizontally based on xMove input (-1 = left, 1 = right)
+    void FlipCharacter(float newDirection)
+    {
+        Vector3 scale = transform.localScale;
+        if (newDirection != scale.x)
+        {
+            scale.x = newDirection;
+            transform.localScale = scale;
+        }
     }
 }
