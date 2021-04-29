@@ -12,6 +12,10 @@ public class BallMovement : MonoBehaviour
 
     void Awake() => InitVars();
 
+    private void Update()
+    {
+        MoveBall();
+    }
 
     void InitVars()
     {
@@ -26,7 +30,7 @@ public class BallMovement : MonoBehaviour
         // sets ball speed on initilization
         // horizontal as fixed float
         // vertical speed varied based on the ball size
-        float xSpeed = 2.5f;
+        float xSpeed = 5f;
         float ySpeed = 0f;
 
         switch (this.gameObject.tag)
@@ -60,16 +64,32 @@ public class BallMovement : MonoBehaviour
         speed = new Vector2(xSpeed, ySpeed);
     }
 
-    
+    void MoveBall()
+    {
+        // dont move the ball left or right when no direcion has been set
+        if (xDirection == 0)
+            return;
+
+        // moving the transform.position based on the our set xDirection(-1,0,1) * by speed.x
+        Vector3 newPos = m_Rigidbody.position;
+        newPos.x += (speed.x * xDirection) * Time.deltaTime;
+        m_Rigidbody.position = newPos;
+    }
 
     private void OnTriggerEnter2D(Collider2D coll)
     {
+        Debug.Log("coll with "+coll.tag);
+
         if (coll.tag == "Ground")
             m_Rigidbody.velocity = new Vector2(0, speed.y);
         else if (coll.tag == "WallRight")
-            m_Rigidbody.velocity = new Vector2(-speed.x, 0f);
+        {
+            xDirection = -1;
+        }
         else if (coll.tag == "WallLeft")
-            m_Rigidbody.velocity = new Vector2(speed.x, 0f);
+        {
+            xDirection = 1;
+        }
         else if (coll.tag == "Ceil")
             m_Rigidbody.velocity = Vector2.zero;
     }
