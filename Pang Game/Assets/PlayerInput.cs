@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerInput : MonoBehaviour
 {
     // init player vars
-    public Vector2 XYMovement;
+    [SerializeField] Vector2 XYMovement;
     private Vector2 newInput;
 
     void Awake() => InitVars();
@@ -22,5 +22,10 @@ public class PlayerInput : MonoBehaviour
 
         newInput = new Vector2(xMove, yMove);
         XYMovement = newInput;
+    }
+
+    public Vector2 GetPlayerInput()
+    {
+        return XYMovement;
     }
 }
