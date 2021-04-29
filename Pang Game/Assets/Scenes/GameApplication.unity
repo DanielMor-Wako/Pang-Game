@@ -1226,7 +1226,7 @@ PrefabInstance:
     - target: {fileID: 786016811207498609, guid: b4470aa2d92c7a7449b3bf8235b505ea,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 2.4
       objectReference: {fileID: 0}
     - target: {fileID: 786016811207498609, guid: b4470aa2d92c7a7449b3bf8235b505ea,
         type: 3}
@@ -1300,7 +1300,7 @@ PrefabInstance:
     - target: {fileID: 1375773085379972602, guid: 4b44086f68ae88f488c638e8e47274ed,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 2.4
       objectReference: {fileID: 0}
     - target: {fileID: 1375773085379972602, guid: 4b44086f68ae88f488c638e8e47274ed,
         type: 3}
@@ -1369,7 +1369,7 @@ PrefabInstance:
     - target: {fileID: 4336467169393882219, guid: 47210891493d8824298993b89821a35d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 2.4
       objectReference: {fileID: 0}
     - target: {fileID: 4336467169393882219, guid: 47210891493d8824298993b89821a35d,
         type: 3}
@@ -1438,7 +1438,7 @@ PrefabInstance:
     - target: {fileID: 5532122196367492853, guid: c0b6b729d59afde48800dcae178d92a5,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 2.4
       objectReference: {fileID: 0}
     - target: {fileID: 5532122196367492853, guid: c0b6b729d59afde48800dcae178d92a5,
         type: 3}
@@ -1507,7 +1507,7 @@ PrefabInstance:
     - target: {fileID: 7972745564289732393, guid: 07e3f4e842fdbec42a767834427b02e9,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 2.4
       objectReference: {fileID: 0}
     - target: {fileID: 7972745564289732393, guid: 07e3f4e842fdbec42a767834427b02e9,
         type: 3}
@@ -1576,7 +1576,7 @@ PrefabInstance:
     - target: {fileID: 8278478790570173807, guid: 552d0d733355d3a45930e69ed0cf3aca,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 2.4
       objectReference: {fileID: 0}
     - target: {fileID: 8278478790570173807, guid: 552d0d733355d3a45930e69ed0cf3aca,
         type: 3}
