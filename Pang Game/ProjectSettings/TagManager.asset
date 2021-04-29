@@ -8,6 +8,12 @@ TagManager:
   - Ceil
   - WallLeft
   - WallRight
+  - BallSize_1
+  - BallSize_2
+  - BallSize_3
+  - BallSize_4
+  - BallSize_5
+  - BallSize_6
   layers:
   - Default
   - TransparentFX
