@@ -61,4 +61,17 @@ public class BallMovement : MonoBehaviour
     }
 
     
+
+    private void OnTriggerEnter2D(Collider2D coll)
+    {
+        if (coll.tag == "Ground")
+            m_Rigidbody.velocity = new Vector2(0, speed.y);
+        else if (coll.tag == "WallRight")
+            m_Rigidbody.velocity = new Vector2(-speed.x, 0f);
+        else if (coll.tag == "WallLeft")
+            m_Rigidbody.velocity = new Vector2(speed.x, 0f);
+        else if (coll.tag == "Ceil")
+            m_Rigidbody.velocity = Vector2.zero;
+    }
+
 }
