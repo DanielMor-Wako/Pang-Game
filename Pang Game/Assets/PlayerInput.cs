@@ -4,10 +4,10 @@ using UnityEngine;
 public class PlayerInput : MonoBehaviour
 {
     // init player vars
-    [SerializeField] Vector2 XYMovement;
+    public Vector2 XYMovement;
     private Vector2 newInput;
 
-    void Start() => InitVars();
+    void Awake() => InitVars();
 
     void InitVars()
     {
