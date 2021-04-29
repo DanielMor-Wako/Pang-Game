@@ -1515,38 +1515,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8284181599844640700, guid: 444a95b064a2feb489d76943e357416b,
         type: 3}
-      propertyPath: speed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8284181599844640700, guid: 444a95b064a2feb489d76943e357416b,
-        type: 3}
-      propertyPath: maxVelocity
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8284181599844640701, guid: 444a95b064a2feb489d76943e357416b,
-        type: 3}
-      propertyPath: m_Mass
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8284181599844640701, guid: 444a95b064a2feb489d76943e357416b,
-        type: 3}
-      propertyPath: m_LinearDrag
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8284181599844640701, guid: 444a95b064a2feb489d76943e357416b,
-        type: 3}
-      propertyPath: m_GravityScale
-      value: 2
+      propertyPath: m_moveDelay
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 8284181599844640702, guid: 444a95b064a2feb489d76943e357416b,
         type: 3}
       propertyPath: m_RootOrder
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8284181599844640702, guid: 444a95b064a2feb489d76943e357416b,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8284181599844640702, guid: 444a95b064a2feb489d76943e357416b,
         type: 3}

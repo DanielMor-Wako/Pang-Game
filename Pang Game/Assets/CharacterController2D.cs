@@ -14,8 +14,8 @@ public class CharacterController2D : MonoBehaviour
     //private Animator anim;
     //private AudioClip shootSound;
 
-    private bool b_canMove, b_canShoot;
-    
+    [SerializeField] private bool b_canMove;
+    public float m_moveDelay = 0.5f;
 
     void Awake() => InitVars();
 
@@ -28,7 +28,6 @@ public class CharacterController2D : MonoBehaviour
             playerInput = Object.FindObjectOfType<PlayerInput>();
 
         b_canMove = true;
-        b_canShoot = true;
     }
 
     void FixedUpdate()
@@ -41,22 +40,22 @@ public class CharacterController2D : MonoBehaviour
         float force = 0f;
         float velocity = Mathf.Abs(m_Rigidbody.velocity.x);
 
-        Vector2 move = playerInput.GetPlayerInput();
+        float xMove = playerInput.GetPlayerXInput();
         
         if (b_canMove)
         {
             // player wish to move left or right
-            if (move.x != 0)
+            if (xMove != 0)
             {
                 // if player has not reached max speed, and can still move
                 // move on x Axis based on keyboard input (-1 = left, 1 = right)
                 if (velocity < maxVelocity)
-                    force = speed * Mathf.Sign(move.x);
+                    force = speed * Mathf.Sign(xMove);
 
                 m_Rigidbody.AddForce(new Vector2(force, 0));
 
                 // changing player x scale to face left or right
-                FlipCharacter(Mathf.Sign(move.x));
+                FlipCharacter(Mathf.Sign(xMove));
             }
         }
     }
@@ -70,5 +69,22 @@ public class CharacterController2D : MonoBehaviour
             scale.x = newDirection;
             transform.localScale = scale;
         }
+    }
+
+
+    public void StartShootingDelay()
+    {
+        // Start shooting coroutine
+        StartCoroutine(MovementDelayCoroutine());
+    }
+
+    private IEnumerator MovementDelayCoroutine()
+    {
+        b_canMove = false;
+
+        // wait the shooting delay time and then continue
+        yield return new WaitForSeconds(m_moveDelay);
+
+        b_canMove = true;
     }
 }

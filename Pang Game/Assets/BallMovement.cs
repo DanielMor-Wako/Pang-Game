@@ -34,7 +34,7 @@ public class BallMovement : MonoBehaviour
         // sets ball speed on initilization
         // horizontal as fixed float
         // vertical speed varied based on the ball size
-        float xSpeed = 5f;
+        float xSpeed = 3f;
         float ySpeed = 0f;
 
         switch (this.gameObject.tag)
@@ -82,8 +82,6 @@ public class BallMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D coll)
     {
-        Debug.Log("coll with "+coll.tag);
-
         if (coll.tag == "Ground")
             m_Rigidbody.velocity = new Vector2(0, speed.y);
         else if (coll.tag == "WallRight")

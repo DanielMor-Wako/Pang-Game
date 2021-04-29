@@ -26,8 +26,12 @@ public class PlayerInput : MonoBehaviour
         XYMovement = newInput;
     }
 
-    public Vector2 GetPlayerInput()
+    public float GetPlayerXInput()
     {
-        return XYMovement;
+        return XYMovement.x;
+    }
+    public float GetPlayerYInput()
+    {
+        return XYMovement.y;
     }
 }
