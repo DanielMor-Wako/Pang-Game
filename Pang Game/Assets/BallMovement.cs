@@ -18,42 +18,47 @@ public class BallMovement : MonoBehaviour
         if (m_Rigidbody == null)
             m_Rigidbody = GetComponent<Rigidbody2D>();
 
-        SetBallSpeedY();
+        SetBallSpeed();
     }
-
-    void SetBallSpeedY()
+    
+    void SetBallSpeed()
     {
+        // sets ball speed on initilization
+        // horizontal as fixed float
+        // vertical speed varied based on the ball size
         float xSpeed = 2.5f;
+        float ySpeed = 0f;
 
         switch (this.gameObject.tag)
         {
             case "BallSize_6":
-            break;
+                ySpeed = 12f;
+                break;
 
             case "BallSize_5":
+                ySpeed = 11f;
                 break;
 
             case "BallSize_4":
+                ySpeed = 10f;
                 break;
 
             case "BallSize_3":
+                ySpeed = 9f;
                 break;
 
             case "BallSize_2":
+                ySpeed = 8f;
                 break;
 
             case "BallSize_1":
+                ySpeed = 7f;
                 break;
 
         }
-        float ySpeed = 2.5f;
 
         speed = new Vector2(xSpeed, ySpeed);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 }
