@@ -14,6 +14,7 @@ TagManager:
   - BallSize_4
   - BallSize_5
   - BallSize_6
+  - Shot
   layers:
   - Default
   - TransparentFX
@@ -26,7 +27,7 @@ TagManager:
   - Surface
   - Player
   - Ball
-  - 
+  - Weapon
   - 
   - 
   - 
