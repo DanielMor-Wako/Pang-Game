@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4336467169393882217}
   - component: {fileID: 4336467169393882218}
   - component: {fileID: 373908386}
+  - component: {fileID: 373908389}
   m_Layer: 10
   m_Name: BallSize_5
   m_TagString: BallSize_5
@@ -135,4 +136,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Rigidbody: {fileID: 4336467169393882218}
   speed: {x: 0, y: 0}
-  xDirection: -1
+  xDirection: 1
+--- !u!114 &373908389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4336467169393882196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c592222dc42b039459f3c7869648f5a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextPrefabOnPop: 4
+  OnPopEvent:
+    m_PersistentCalls:
+      m_Calls: []
