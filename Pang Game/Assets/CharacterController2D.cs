@@ -31,10 +31,9 @@ public class CharacterController2D : MonoBehaviour
         b_canShoot = true;
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-
+        MovePlayer();
     }
     
     void MovePlayer()
@@ -53,6 +52,8 @@ public class CharacterController2D : MonoBehaviour
                 // move on x Axis based on keyboard input (-1 = left, 1 = right)
                 if (velocity < maxVelocity)
                     force = speed * Mathf.Sign(move.x);
+
+                m_Rigidbody.AddForce(new Vector2(force, 0));
 
                 // changing player x scale to face left or right
                 FlipCharacter(Mathf.Sign(move.x));
