@@ -76,10 +76,12 @@ public class GameManager : MonoBehaviour
     private int alivePlayers = 2;
     private float Countdown = 0;
     [SerializeField] int score = 0;
+    [SerializeField] CharacterController2D player1;
+    [SerializeField] CharacterController2D player2;
 
     //[SerializeField] CharacterController2D controller;
     private Camera cam;
-    [SerializeField] private LoadingLevelUpdater LoadingLevelScreen;
+    private UiMenusManager uiMenuManager;
     public LevelSet[] LevelsList;
     public int currentLevel;
 
@@ -99,8 +101,8 @@ public class GameManager : MonoBehaviour
         if (cam == null)
             cam = Camera.main;
 
-        if (LoadingLevelScreen == null)
-            LoadingLevelScreen = GameObject.FindObjectOfType<LoadingLevelUpdater>();
+        if (uiMenuManager == null)
+            uiMenuManager = GameObject.FindObjectOfType<UiMenusManager>();
     }
 
     public void Start()
@@ -113,8 +115,9 @@ public class GameManager : MonoBehaviour
     {
         alivePlayers--;
         bool noPlayersLeft = isGameOver();
+        if (noPlayersLeft)
+            GameOver();
     }
-
     public bool isGameOver()
     {
         bool result;
@@ -125,7 +128,7 @@ public class GameManager : MonoBehaviour
     private void GameOver()
     {
         Debug.Log("Game Over");
-        // uiMenuManager.Activate("level...");
+        uiMenuManager.Activate("mainMenu");
     }
     public void StartNewGame(int playersCount)
     {
@@ -135,9 +138,6 @@ public class GameManager : MonoBehaviour
 
         currentLevel = 1;
         StartLevel(currentLevel);
-        // load new game by the level index
-        // load player/s , ball/s and switch background
-        //backgroundImage.SwitchToSprite(level);
 }
     public void StartNextLevel()
     {
@@ -187,7 +187,6 @@ public class GameManager : MonoBehaviour
             //Debug.Log("checking against " + LevelsList[LevelID].LevelID);
             if (newLvl == LevelsList[LevelID].LevelID)
             {
-                //LevelToLoad = newLvl;//LevelsList[LevelID].LevelID;
                 LevelToLoad = LevelID;//LevelsList[LevelID].LevelID;
                 Debug.Log("Loading Level " + LevelsList[LevelID].LevelID + " id(" + LevelToLoad + ") ");
             }
@@ -205,13 +204,15 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        // add objects
+        // clear all ui screens
+        uiMenuManager.Clear();
         //StopCoroutine("LevelSpawner");
         StartCoroutine("LevelSpawner", LevelToLoad);
     }
 
     IEnumerator LevelSpawner(int LevelID)
     {
+        // load new game by the level index
         LevelSet incomingLevel = LevelsList[LevelID];
 
         isGameRunning = false;
@@ -220,8 +221,23 @@ public class GameManager : MonoBehaviour
 
         // spawn player/s
         alivePlayers = totalPlayers;
+        Debug.Log("new game with "+ alivePlayers+" player");
+        if (totalPlayers == 2)
+        {
+            player1.transform.position = incomingLevel.Player1SpawnPoint.position;
+            player1.gameObject.SetActive(true);
+            player2.transform.position = incomingLevel.Player2SpawnPoint.position;
+            player2.gameObject.SetActive(true);
+        }
+        else if (totalPlayers == 1)
+        {
+            player1.gameObject.SetActive(true);
+            player1.transform.position = incomingLevel.Player1SpawnPoint.position;
+            player2.gameObject.SetActive(false);
+        }
         Countdown = incomingLevel.TimerCountdown;
         // change background
+        //backgroundImage.SwitchToSprite(level);
         // generate level
         List<BallMovement> NewBallsList = new List<BallMovement>();
         for (int i=0; i < incomingLevel.Balls.Length; i++)
@@ -259,8 +275,10 @@ public class GameManager : MonoBehaviour
     
     private void StartIncomingLevelAnimation(bool activate, float countdown)
     {
-        if (LoadingLevelScreen == null)
+        if (uiMenuManager == null)
             return;
+
+        LoadingLevelUpdater LoadingLevelScreen = uiMenuManager.levelLoading.GetComponent<LoadingLevelUpdater>();
 
         LoadingLevelScreen.gameObject.SetActive(activate);
         LoadingLevelScreen.countdown = countdown;
