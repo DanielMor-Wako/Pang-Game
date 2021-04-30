@@ -38,5 +38,7 @@ public class BallPop : MonoBehaviour
                 RightBallMove.InitialJump();
             }
         }
+
+        gameObject.SetActive(false);
     }
 }

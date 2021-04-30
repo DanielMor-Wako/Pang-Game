@@ -95,9 +95,15 @@ public class BallMovement : MonoBehaviour
         if (coll.tag == "Ground")
             m_Rigidbody.velocity = new Vector2(0, speed.y);
         else if (coll.tag == "Player")
+        {
             coll.GetComponent<CharacterController2D>().OnPlayerDeath();
+            GetComponent<BallPop>()?.PopBall();
+        }
         else if (coll.tag == "Shot")
-            BallPopped();
+        {
+            coll.gameObject.SetActive(false);
+            GetComponent<BallPop>()?.PopBall();
+        }
         else if (coll.tag == "WallRight")
             xDirection = -1;
         else if (coll.tag == "WallLeft")
@@ -105,10 +111,5 @@ public class BallMovement : MonoBehaviour
         else if (coll.tag == "Ceil")
             m_Rigidbody.velocity = Vector2.zero;
     }
-
-    void BallPopped()
-    {
-        // despawning the ball
-        gameObject.SetActive(false);
-    }
+    
 }
