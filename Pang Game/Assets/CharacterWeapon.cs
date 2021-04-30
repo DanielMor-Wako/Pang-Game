@@ -58,12 +58,12 @@ public class CharacterWeapon : MonoBehaviour
             result = false;
         
         if (activeWeaponPool == null)
-            activeWeaponPool = ObjectPoolList._instance.GetRelevantPool(activeWeapon.ToString());
+            activeWeaponPool = ObjectPoolList._instance.GetRelevantPool("Player" + myID.ID + activeWeapon.ToString());
 
-        // checking if any new slot for a shot is available (-1 = none)
-        int NewAvaialbleSlots = activeWeaponPool.ReturnCountOfAllAvailableObjects();
+        // checking if any new slot for a shot is available (-1 = none, 0 = it has 1 in the array)
+        int NewAvaialbleSlot = activeWeaponPool.ReturnCountOfAllAvailableObjects();
         //Debug.Log("NewAvaialbleSlots " + (NewAvaialbleSlots+1));
-        if (NewAvaialbleSlots == -1)
+        if (NewAvaialbleSlot == -1)
             result = false;
 
         return result;
@@ -87,7 +87,9 @@ public class CharacterWeapon : MonoBehaviour
     private IEnumerator ShootCoroutine()
     {
         b_canShoot = false;
-        ObjectPoolList._instance.SpawnObject(activeWeapon.ToString(), transform.position);
+        string weaponName = "Player" + myID.ID + activeWeapon.ToString();
+        ObjectPoolList._instance.SpawnObject(weaponName, transform.position);
+        //ObjectPoolList._instance.SpawnObject(activeWeapon.ToString(), transform.position); 
 
         // wait the shooting delay time and then continue
         yield return new WaitForSeconds(m_shootDelay);
