@@ -4,7 +4,7 @@ using UnityEngine.Events;
 
 public class BallPop : MonoBehaviour
 {
-    public enum BallPrefab { None, BallSize_1, BallSize_2, BallSize_3, BallSize_4, BallSize_5 }
+    public enum BallPrefab { None, BallSize_1, BallSize_2, BallSize_3, BallSize_4, BallSize_5, BallSize_6 }
     public BallPrefab nextPrefabOnPop;
     
     public UnityEvent OnPopEvent;
