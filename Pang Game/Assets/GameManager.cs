@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//using TMPro;
 
 [System.Serializable]
 public class Ball_Properties
@@ -77,11 +76,12 @@ public class GameManager : MonoBehaviour
     private int alivePlayers = 2;
     private float Countdown = 0;
     [SerializeField] int score = 0;
-    //[SerializeField] TextMeshProUGUI scoreTxt;
 
     //[SerializeField] CharacterController2D controller;
     private Camera cam;
+    [SerializeField] private LoadingLevelUpdater LoadingLevelScreen;
     public LevelSet[] LevelsList;
+    public int currentLevel;
 
     private void Awake()
     {
@@ -98,11 +98,15 @@ public class GameManager : MonoBehaviour
 
         if (cam == null)
             cam = Camera.main;
+
+        if (LoadingLevelScreen == null)
+            LoadingLevelScreen = GameObject.FindObjectOfType<LoadingLevelUpdater>();
     }
 
     public void Start()
     {
-        StartLevel(Random.Range(1, LevelsList.Length));
+        currentLevel = Random.Range(1, LevelsList.Length);
+        StartLevel(currentLevel);
     }
 
     public void PlayerDied(int PlayerID)
@@ -225,10 +229,13 @@ public class GameManager : MonoBehaviour
                 
             }
         }
-        
-        StartIncomingLevelAnimation();
-        yield return new WaitForSeconds(2f);
 
+        float DelayBeforeLevelStarts = 3f;
+        StartIncomingLevelAnimation(true, DelayBeforeLevelStarts);
+
+        yield return new WaitForSeconds(DelayBeforeLevelStarts);
+
+        StartIncomingLevelAnimation(false, 0f);
         isGameRunning = true;
         
         // give all balls an initial jump
@@ -241,11 +248,15 @@ public class GameManager : MonoBehaviour
         Debug.Log("LevelSpawner(" + incomingLevel.LevelID + ") Ended ");
     }
     
-    private void StartIncomingLevelAnimation()
+    private void StartIncomingLevelAnimation(bool activate, float countdown)
     {
-        Debug.Log("Ready... set... go");
-        //incomingLevelAnim.gameObject.SetActive(true);
+        if (LoadingLevelScreen == null)
+            return;
+
+        LoadingLevelScreen.gameObject.SetActive(activate);
+        LoadingLevelScreen.countdown = countdown;
     }
+
     public int GetScore()
     {
         return score;

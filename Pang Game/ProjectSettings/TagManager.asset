@@ -52,3 +52,21 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 380024243
+    locked: 0
+  - name: Shots
+    uniqueID: 3909364611
+    locked: 0
+  - name: Player
+    uniqueID: 3598658351
+    locked: 0
+  - name: Balls
+    uniqueID: 2969826297
+    locked: 0
+  - name: Powerups
+    uniqueID: 3934231427
+    locked: 0
+  - name: UI
+    uniqueID: 2813035069
+    locked: 0
