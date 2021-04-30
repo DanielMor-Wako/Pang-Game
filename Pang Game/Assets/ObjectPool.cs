@@ -62,12 +62,13 @@ public class ObjectPool : MonoBehaviour
         else
         {
             // Debug.Log("couldnt find available object "+prefab[0]);
-            // creating new object
+            // creating new object if possible
             if (!LimitObjectsCount)
             {
                 // Store new object to the pool
                 GameObject newInstance = CreateNewObject();
                 AddObjectToList(newInstance);
+                nextObjectToSpawn = newInstance;
             }
         }
 
@@ -94,9 +95,10 @@ public class ObjectPool : MonoBehaviour
         newInstance.transform.SetParent(transform);
         return newInstance;
     }
-    private GameObject ReturnNextPoolObject()
+    public int ReturnCountOfAllAvailableObjects()
     {
         // find available inactive Object
+        // -1 = none, 0 and above relates to the index number in objects array
         int AvailableObjectID = -1;
         for (int i = 0; i < objects.Count; i++)
         {
@@ -107,6 +109,13 @@ public class ObjectPool : MonoBehaviour
                 i = objects.Count;
             }
         }
+        return AvailableObjectID;
+    }
+    private GameObject ReturnNextPoolObject()
+    {
+        // find available inactive Object
+        // -1 = none, 0 and above relates to the index number in objects array
+        int AvailableObjectID = ReturnCountOfAllAvailableObjects();
         if (AvailableObjectID > -1)
         {
             //Debug.Log("Object to pull found. ID = "+ AvailableObjectID);

@@ -9,6 +9,8 @@ public class CharacterWeapon : MonoBehaviour
 
     public enum WeaponPrefab { Rope, Shot, StickyRope, Laser }
     public WeaponPrefab activeWeapon;
+    // storing a reference to the current weapon pool, to check for available spots before spawning
+    private ObjectPool activeWeaponPool;
 
     // max active shots that can exist simultaionasly on the scene
     [Range(0, 5)] [SerializeField] private int maxActiveShots;
@@ -40,10 +42,31 @@ public class CharacterWeapon : MonoBehaviour
         }
     }
 
+    bool IsShootingAllowed()
+    {
+        bool result = true;
+
+        if (!b_canShoot)
+            result = false;
+        
+        if (activeWeaponPool == null)
+            activeWeaponPool = ObjectPoolList._instance.GetRelevantPool(activeWeapon.ToString());
+
+        // checking if any new slot for a shot is available (-1 = none)
+        int NewAvaialbleSlots = activeWeaponPool.ReturnCountOfAllAvailableObjects();
+        //Debug.Log("NewAvaialbleSlots " + (NewAvaialbleSlots+1));
+        if (NewAvaialbleSlots == -1)
+            result = false;
+
+        return result;
+    }
+
     void ShootWeapon()
     {
         // check for current weapon requirements
-        if (!b_canShoot)
+        bool allowShooting = IsShootingAllowed();
+        // if any restrictions apllied, then abort shooting
+        if (!allowShooting)
             return;
 
         // Start shooting coroutine
@@ -56,12 +79,11 @@ public class CharacterWeapon : MonoBehaviour
     private IEnumerator ShootCoroutine()
     {
         b_canShoot = false;
-        Debug.Log("b_canShoot = " + b_canShoot);
+        ObjectPoolList._instance.SpawnObject(activeWeapon.ToString(), transform.position);
 
         // wait the shooting delay time and then continue
         yield return new WaitForSeconds(m_shootDelay);
 
         b_canShoot = true;
-        Debug.Log("b_canShoot = " + b_canShoot);
     }
 }
