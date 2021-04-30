@@ -72,7 +72,9 @@ public class GameManager : MonoBehaviour
         }
     }
     #endregion
-    private int Countdown = 0;
+    public int totalPlayers = 2;
+    private int alivePlayers = 2;
+    private float Countdown = 0;
     [SerializeField] int score = 0;
     //[SerializeField] TextMeshProUGUI scoreTxt;
 
@@ -99,12 +101,21 @@ public class GameManager : MonoBehaviour
 
     public void Start()
     {
-        
+        StartLevel(1);
+    }
+
+    public void PlayerDied(int PlayerID)
+    {
+        alivePlayers--;
+        isGameOver();
     }
 
     public bool isGameOver()
     {
-        return true;
+        bool result;
+        result = alivePlayers <= 0;
+        Debug.Log("isGameOver = " + result);
+        return result;
     }
     private void GameOver()
     {
@@ -189,15 +200,28 @@ public class GameManager : MonoBehaviour
     {
         LevelSet incomingLevel = LevelsList[LevelID];
 
+        // clear previous objects
+        ObjectPoolList._instance.DespawnAll();
+
         StartIncomingLevelAnimation();
         yield return new WaitForSeconds(1f);
 
-        // spawned player
+        // spawn player/s
+        alivePlayers = totalPlayers;
+        Countdown = incomingLevel.TimerCountdown;
+        // change background
+        // generate level
+        for (int i=0; i < incomingLevel.Balls.Length; i++)
+        {
+            // spawn balls
+            GameObject NewBall = ObjectPoolList._instance.SpawnObject(incomingLevel.Balls[i].BallSize.ToString(), incomingLevel.Balls[i].BallSpawnPoint.position);
+            // change ball xDirection
+            BallMovement NewBallScript = NewBall.GetComponent<BallMovement>();
+            NewBallScript?.SetBallxDirection(incomingLevel.Balls[i].BallInitialDirection);
+        }
 
-        // spawn balls
-        // change ball xDirection using SetBallxDirection()
 
-        Debug.Log("LevelSpawner(" + incomingLevel.LevelID + ") Ended ");
+    Debug.Log("LevelSpawner(" + incomingLevel.LevelID + ") Ended ");
     }
     
     private void StartIncomingLevelAnimation()
