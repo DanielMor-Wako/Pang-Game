@@ -87,7 +87,7 @@ public class BallMovement : MonoBehaviour
         else if (coll.tag == "Player")
             Debug.Log("player died");
         else if (coll.tag == "Shot")
-            Debug.Log("ball pop");
+            BallPopped();
         else if (coll.tag == "WallRight")
             xDirection = -1;
         else if (coll.tag == "WallLeft")
@@ -96,4 +96,9 @@ public class BallMovement : MonoBehaviour
             m_Rigidbody.velocity = Vector2.zero;
     }
 
+    void BallPopped()
+    {
+        // despawning the ball
+        gameObject.SetActive(false);
+    }
 }

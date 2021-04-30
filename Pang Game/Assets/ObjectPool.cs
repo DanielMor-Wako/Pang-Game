@@ -56,6 +56,8 @@ public class ObjectPool : MonoBehaviour
         if (nextObjectToSpawn != null)
         {
             //Debug.Log("found available object");
+            nextObjectToSpawn.transform.position = pos;
+            nextObjectToSpawn.SetActive(true);
         }
         else
         {
@@ -108,7 +110,6 @@ public class ObjectPool : MonoBehaviour
         if (AvailableObjectID > -1)
         {
             //Debug.Log("Object to pull found. ID = "+ AvailableObjectID);
-            //objects[AvailableObjectID].ShootProjectileAtDirection(pos);
             return objects[AvailableObjectID].gameObject;
         }
         else

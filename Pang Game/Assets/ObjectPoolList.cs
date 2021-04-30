@@ -43,14 +43,23 @@ public class ObjectPoolList : MonoBehaviour
 
     public ObjectPool[] objectsList;
 
-    public void SpawnObject(string prefab, Vector2 pos)
+    public GameObject SpawnObject(string prefab, Vector2 pos)
     {
         if (objectsList.Length <= 0)
-            return;
+            return null;
 
         ObjectPool relevantPool = GetRelevantPool(prefab);
         if (relevantPool != null)
-            relevantPool.SpawnObject(pos);
+        {
+            GameObject newObject = relevantPool.SpawnObject(pos);
+            Debug.Log("Spawning " + newObject.tag+" on "+pos);
+            return newObject;
+        }
+        else
+        {
+            Debug.Log("no object to spawn ");
+            return null;
+        }
     }
 
     public ObjectPool GetRelevantPool(string objpool)
@@ -58,7 +67,7 @@ public class ObjectPoolList : MonoBehaviour
         ObjectPool result = null;
         foreach (ObjectPool o in objectsList)
         {
-            if (o.prefab.ToString() == objpool)
+            if (o.prefab.name == objpool)
                 result = o;
         }
         return result;

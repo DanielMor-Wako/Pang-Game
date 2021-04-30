@@ -14,4 +14,23 @@ public class BallPop : MonoBehaviour
         if (OnPopEvent == null)
             OnPopEvent = new UnityEvent();
     }
+
+    public void PopBall()
+    {
+        Debug.Log(gameObject.tag+" has poped");
+
+        GameObject LeftBall = ObjectPoolList._instance.SpawnObject(nextPrefabOnPop.ToString(), transform.position);
+        GameObject RightBall = ObjectPoolList._instance.SpawnObject(nextPrefabOnPop.ToString(), transform.position);
+
+        if (LeftBall != null)
+        {
+            BallMovement LeftBallMove = LeftBall.GetComponent<BallMovement>();
+            if (LeftBallMove != null) { LeftBallMove.SetBallxDirection(-1); }
+        }
+
+        if (RightBall != null) {
+            BallMovement RightBallMove = RightBall.GetComponent<BallMovement>();
+            if (RightBallMove != null) { RightBallMove.SetBallxDirection(1); }
+        }
+    }
 }
