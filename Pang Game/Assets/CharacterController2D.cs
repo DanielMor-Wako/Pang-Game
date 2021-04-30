@@ -78,11 +78,10 @@ public class CharacterController2D : MonoBehaviour
             transform.localScale = scale;
         }
     }
-
-
+    
     public void StartShootingDelay()
     {
-        // Start shooting coroutine
+        // Start shooting delay
         StartCoroutine(MovementDelayCoroutine());
     }
 
@@ -94,5 +93,15 @@ public class CharacterController2D : MonoBehaviour
         yield return new WaitForSeconds(m_moveDelay);
 
         b_canMove = true;
+    }
+
+    public void OnPlayerDeath()
+    {
+        StopCoroutine(MovementDelayCoroutine());
+
+        m_Rigidbody.transform.position = new Vector2(-100, 0);
+
+        gameObject.SetActive(false);
+        
     }
 }
