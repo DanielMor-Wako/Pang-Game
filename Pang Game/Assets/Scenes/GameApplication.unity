@@ -295,6 +295,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26ae699545d0c684888d1a3f430b929e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  totalPlayers: 2
   score: 0
   LevelsList:
   - LevelID: 1
@@ -303,8 +304,53 @@ MonoBehaviour:
     Player2SpawnPoint: {fileID: 1580675105}
     Balls:
     - BallSpawnPoint: {fileID: 1368123227}
+      BallSize: 3
+      BallInitialDirection: 0
+  - LevelID: 2
+    TimerCountdown: 40
+    Player1SpawnPoint: {fileID: 1801238800}
+    Player2SpawnPoint: {fileID: 1580675105}
+    Balls:
+    - BallSpawnPoint: {fileID: 1368123227}
       BallSize: 4
       BallInitialDirection: 0
+    - BallSpawnPoint: {fileID: 1368123227}
+      BallSize: 2
+      BallInitialDirection: 1
+    - BallSpawnPoint: {fileID: 1368123227}
+      BallSize: 2
+      BallInitialDirection: -1
+  - LevelID: 3
+    TimerCountdown: 40
+    Player1SpawnPoint: {fileID: 1801238800}
+    Player2SpawnPoint: {fileID: 1580675105}
+    Balls:
+    - BallSpawnPoint: {fileID: 1368123227}
+      BallSize: 2
+      BallInitialDirection: 1
+    - BallSpawnPoint: {fileID: 2120963607}
+      BallSize: 2
+      BallInitialDirection: 1
+    - BallSpawnPoint: {fileID: 1312581782}
+      BallSize: 1
+      BallInitialDirection: 1
+  - LevelID: 4
+    TimerCountdown: 40
+    Player1SpawnPoint: {fileID: 1801238800}
+    Player2SpawnPoint: {fileID: 1801238800}
+    Balls:
+    - BallSpawnPoint: {fileID: 2113956678}
+      BallSize: 2
+      BallInitialDirection: 1
+    - BallSpawnPoint: {fileID: 2113956678}
+      BallSize: 2
+      BallInitialDirection: -1
+    - BallSpawnPoint: {fileID: 1312581782}
+      BallSize: 2
+      BallInitialDirection: 1
+    - BallSpawnPoint: {fileID: 1312581782}
+      BallSize: 2
+      BallInitialDirection: -1
 --- !u!1 &408616339
 GameObject:
   m_ObjectHideFlags: 0
@@ -688,11 +734,11 @@ GameObject:
   m_Component:
   - component: {fileID: 788027041}
   m_Layer: 0
-  m_Name: PlayerSpawn (4)
+  m_Name: PlayerSpawn (4) Mid Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &788027041
 Transform:
@@ -1415,11 +1461,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1312581782}
   m_Layer: 0
-  m_Name: BallSpawn (5)
+  m_Name: BallSpawn (5) Right
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1312581782
 Transform:
@@ -1593,6 +1639,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BallSize_6
       objectReference: {fileID: 0}
+    - target: {fileID: 7972745564289732392, guid: 07e3f4e842fdbec42a767834427b02e9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7972745564289732393, guid: 07e3f4e842fdbec42a767834427b02e9,
         type: 3}
       propertyPath: m_RootOrder
@@ -1666,11 +1717,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1368123227}
   m_Layer: 0
-  m_Name: BallSpawn (3)
+  m_Name: BallSpawn (3) Middle
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1368123227
 Transform:
@@ -1696,11 +1747,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1431137378}
   m_Layer: 0
-  m_Name: PlayerSpawn (1)
+  m_Name: PlayerSpawn (1) Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1431137378
 Transform:
@@ -1761,11 +1812,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1580675105}
   m_Layer: 0
-  m_Name: PlayerSpawn (2)
+  m_Name: PlayerSpawn (2) Mid Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1580675105
 Transform:
@@ -1887,11 +1938,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1801238800}
   m_Layer: 0
-  m_Name: PlayerSpawn (3)
+  m_Name: PlayerSpawn (3) Middle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1801238800
 Transform:
@@ -1917,11 +1968,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1827221247}
   m_Layer: 0
-  m_Name: BallSpawn (4)
+  m_Name: BallSpawn (4) Mid Right
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1827221247
 Transform:
@@ -2066,11 +2117,11 @@ GameObject:
   m_Component:
   - component: {fileID: 1930477376}
   m_Layer: 0
-  m_Name: PlayerSpawn (5)
+  m_Name: PlayerSpawn (5) Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1930477376
 Transform:
@@ -2096,11 +2147,11 @@ GameObject:
   m_Component:
   - component: {fileID: 2113956678}
   m_Layer: 0
-  m_Name: BallSpawn (1)
+  m_Name: BallSpawn (1) Left
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &2113956678
 Transform:
@@ -2126,11 +2177,11 @@ GameObject:
   m_Component:
   - component: {fileID: 2120963607}
   m_Layer: 0
-  m_Name: BallSpawn (2)
+  m_Name: BallSpawn (2) Mid Left
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &2120963607
 Transform:

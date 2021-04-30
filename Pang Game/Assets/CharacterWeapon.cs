@@ -66,7 +66,7 @@ public class CharacterWeapon : MonoBehaviour
             // checking if any new slot for a shot is available (-1 = none, 0 = it has 1 in the array)
             int activeShots = activeWeaponPool.ReturnActiveObjectsCount();
             int avaialbleSlots = maxActiveShots - activeShots;
-            Debug.Log("NewAvaialbleSlots " + avaialbleSlots);
+            //Debug.Log("NewAvaialbleSlots " + avaialbleSlots);
             if (avaialbleSlots <= 0)
                 result = false;
         }

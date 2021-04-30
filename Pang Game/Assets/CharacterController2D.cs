@@ -102,6 +102,7 @@ public class CharacterController2D : MonoBehaviour
         m_Rigidbody.transform.position = new Vector2(-100, 0);
 
         gameObject.SetActive(false);
-        
+
+        GameManager._instance.PlayerDied(myID.ID);
     }
 }

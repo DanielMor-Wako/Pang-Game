@@ -85,7 +85,7 @@ public class BallMovement : MonoBehaviour
         if (coll.tag == "Ground")
             m_Rigidbody.velocity = new Vector2(0, speed.y);
         else if (coll.tag == "Player")
-            Debug.Log("player died");
+            coll.GetComponent<CharacterController2D>().OnPlayerDeath();
         else if (coll.tag == "Shot")
             BallPopped();
         else if (coll.tag == "WallRight")
