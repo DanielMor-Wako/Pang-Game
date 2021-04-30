@@ -105,8 +105,8 @@ public class GameManager : MonoBehaviour
 
     public void Start()
     {
-        currentLevel = Random.Range(1, LevelsList.Length);
-        StartLevel(currentLevel);
+        //currentLevel = Random.Range(1, LevelsList.Length);
+        //StartLevel(currentLevel);
     }
 
     public void PlayerDied(int PlayerID)
@@ -127,13 +127,18 @@ public class GameManager : MonoBehaviour
         Debug.Log("Game Over");
         // uiMenuManager.Activate("level...");
     }
-    public void StartNewGame()
+    public void StartNewGame(int playersCount)
     {
         Debug.Log("New Game");
+        totalPlayers = playersCount;
+        alivePlayers = totalPlayers;
+
+        currentLevel = 1;
+        StartLevel(currentLevel);
         // load new game by the level index
         // load player/s , ball/s and switch background
         //backgroundImage.SwitchToSprite(level);
-    }
+}
     public void StartNextLevel()
     {
         Debug.Log("Start next level");
@@ -141,6 +146,10 @@ public class GameManager : MonoBehaviour
     public void AbandonGame()
     {
         Debug.Log("Stop Game");
+    }
+    public void QuitApp()
+    {
+        Application.Quit();
     }
     public void PauseMenu(bool activate)
     {
