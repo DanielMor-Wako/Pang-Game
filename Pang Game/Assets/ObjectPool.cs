@@ -95,9 +95,9 @@ public class ObjectPool : MonoBehaviour
         newInstance.transform.SetParent(transform);
         return newInstance;
     }
-    public int ReturnCountOfAllAvailableObjects()
+    private int ReturnNextAvailableObject()
     {
-        // find available inactive Object
+        // find anext vailable inactive Object
         // -1 = none, 0 and above relates to the index number in objects array
         int AvailableObjectID = -1;
         for (int i = 0; i < objects.Count; i++)
@@ -115,7 +115,7 @@ public class ObjectPool : MonoBehaviour
     {
         // find available inactive Object
         // -1 = none, 0 and above relates to the index number in objects array
-        int AvailableObjectID = ReturnCountOfAllAvailableObjects();
+        int AvailableObjectID = ReturnNextAvailableObject();
         if (AvailableObjectID > -1)
         {
             //Debug.Log("Object to pull found. ID = "+ AvailableObjectID);

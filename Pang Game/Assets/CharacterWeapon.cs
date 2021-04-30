@@ -14,7 +14,7 @@ public class CharacterWeapon : MonoBehaviour
     private ObjectPool activeWeaponPool;
 
     // max active shots that can exist simultaionasly on the scene
-    [Range(0, 5)] [SerializeField] private int maxActiveShots;
+    [Range(1, 5)] [SerializeField] private int maxActiveShots;
     // max duration of sticky weapons (that sticks to the ceiling), 0 = none;
     [Range(0, 5)] [SerializeField] private int maxStickTime;
 
@@ -56,15 +56,20 @@ public class CharacterWeapon : MonoBehaviour
 
         if (!b_canShoot)
             result = false;
-        
+
+        // searching for our weapon prefab based on the player ID and active weapon. example "Player2Shot" "Player1Laser"
         if (activeWeaponPool == null)
             activeWeaponPool = ObjectPoolList._instance.GetRelevantPool("Player" + myID.ID + activeWeapon.ToString());
 
-        // checking if any new slot for a shot is available (-1 = none, 0 = it has 1 in the array)
-        int NewAvaialbleSlot = activeWeaponPool.ReturnCountOfAllAvailableObjects();
-        //Debug.Log("NewAvaialbleSlots " + (NewAvaialbleSlots+1));
-        if (NewAvaialbleSlot == -1)
-            result = false;
+        if (activeWeaponPool != null)
+        {
+            // checking if any new slot for a shot is available (-1 = none, 0 = it has 1 in the array)
+            int activeShots = activeWeaponPool.ReturnActiveObjectsCount();
+            int avaialbleSlots = maxActiveShots - activeShots;
+            Debug.Log("NewAvaialbleSlots " + avaialbleSlots);
+            if (avaialbleSlots <= 0)
+                result = false;
+        }
 
         return result;
     }

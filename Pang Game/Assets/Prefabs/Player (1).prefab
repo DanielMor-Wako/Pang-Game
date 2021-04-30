@@ -78,7 +78,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activeWeapon: 1
-  maxActiveShots: 0
+  maxActiveShots: 1
   maxStickTime: 0
   b_canShoot: 0
   m_shootDelay: 0.5
