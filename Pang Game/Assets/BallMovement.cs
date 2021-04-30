@@ -86,6 +86,8 @@ public class BallMovement : MonoBehaviour
             m_Rigidbody.velocity = new Vector2(0, speed.y);
         else if (coll.tag == "Player")
             Debug.Log("player died");
+        else if (coll.tag == "Shot")
+            Debug.Log("ball pop");
         else if (coll.tag == "WallRight")
             xDirection = -1;
         else if (coll.tag == "WallLeft")
