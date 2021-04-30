@@ -72,6 +72,7 @@ public class GameManager : MonoBehaviour
         }
     }
     #endregion
+    public bool isGameRunning = false;
     public int totalPlayers = 2;
     private int alivePlayers = 2;
     private float Countdown = 0;
@@ -101,13 +102,13 @@ public class GameManager : MonoBehaviour
 
     public void Start()
     {
-        StartLevel(1);
+        StartLevel(Random.Range(1, LevelsList.Length));
     }
 
     public void PlayerDied(int PlayerID)
     {
         alivePlayers--;
-        isGameOver();
+        bool noPlayersLeft = isGameOver();
     }
 
     public bool isGameOver()
@@ -200,28 +201,44 @@ public class GameManager : MonoBehaviour
     {
         LevelSet incomingLevel = LevelsList[LevelID];
 
+        isGameRunning = false;
         // clear previous objects
         ObjectPoolList._instance.DespawnAll();
-
-        StartIncomingLevelAnimation();
-        yield return new WaitForSeconds(1f);
 
         // spawn player/s
         alivePlayers = totalPlayers;
         Countdown = incomingLevel.TimerCountdown;
         // change background
         // generate level
+        List<BallMovement> NewBallsList = new List<BallMovement>();
         for (int i=0; i < incomingLevel.Balls.Length; i++)
         {
             // spawn balls
             GameObject NewBall = ObjectPoolList._instance.SpawnObject(incomingLevel.Balls[i].BallSize.ToString(), incomingLevel.Balls[i].BallSpawnPoint.position);
             // change ball xDirection
             BallMovement NewBallScript = NewBall.GetComponent<BallMovement>();
-            NewBallScript?.SetBallxDirection(incomingLevel.Balls[i].BallInitialDirection);
+            if (NewBallScript != null)
+            {
+                NewBallScript.SetBallxDirection(incomingLevel.Balls[i].BallInitialDirection);
+                NewBallScript.m_Rigidbody.simulated = false;
+                NewBallsList.Add( NewBallScript );
+                
+            }
+        }
+        
+        StartIncomingLevelAnimation();
+        yield return new WaitForSeconds(2f);
+
+        isGameRunning = true;
+        
+        // give all balls an initial jump
+        foreach (BallMovement bm in NewBallsList.ToArray())
+        {
+            bm.m_Rigidbody.simulated = true;
+            bm.InitialJump();
         }
 
-
-    Debug.Log("LevelSpawner(" + incomingLevel.LevelID + ") Ended ");
+        Debug.Log("LevelSpawner(" + incomingLevel.LevelID + ") Ended ");
     }
     
     private void StartIncomingLevelAnimation()

@@ -25,12 +25,18 @@ public class BallPop : MonoBehaviour
         if (LeftBall != null)
         {
             BallMovement LeftBallMove = LeftBall.GetComponent<BallMovement>();
-            if (LeftBallMove != null) { LeftBallMove.SetBallxDirection(-1); }
+            if (LeftBallMove != null) {
+                LeftBallMove.SetBallxDirection(-1);
+                LeftBallMove.InitialJump();
+            }
         }
 
         if (RightBall != null) {
             BallMovement RightBallMove = RightBall.GetComponent<BallMovement>();
-            if (RightBallMove != null) { RightBallMove.SetBallxDirection(1); }
+            if (RightBallMove != null) {
+                RightBallMove.SetBallxDirection(1);
+                RightBallMove.InitialJump();
+            }
         }
     }
 }

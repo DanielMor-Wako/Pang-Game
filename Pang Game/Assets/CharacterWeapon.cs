@@ -39,6 +39,9 @@ public class CharacterWeapon : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (!GameManager._instance.isGameRunning)
+            return;
+
         float yMove = 0;
 
         if (myID.ID == 1)

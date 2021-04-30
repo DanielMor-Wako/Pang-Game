@@ -11,10 +11,6 @@ public class BallMovement : MonoBehaviour
 
     void Awake() => InitVars();
 
-    private void Update()
-    {
-        MoveBall();
-    }
 
     void InitVars()
     {
@@ -22,11 +18,6 @@ public class BallMovement : MonoBehaviour
             m_Rigidbody = GetComponent<Rigidbody2D>();
 
         SetBallSpeed();
-    }
-
-    public void SetBallxDirection(int newDirection)
-    {
-        xDirection = newDirection;
     }
 
     void SetBallSpeed()
@@ -66,6 +57,25 @@ public class BallMovement : MonoBehaviour
         }
 
         speed = new Vector2(xSpeed, ySpeed);
+    }
+
+    // This function gives initial jump to the ball,
+    // it is called when starting a new level AND when a new ball is spawned during the game
+    public void InitialJump()
+    {
+        m_Rigidbody.velocity = new Vector2(0, 3.5f);
+    }
+    public void SetBallxDirection(int newDirection)
+    {
+        xDirection = newDirection;
+    }
+
+    private void Update()
+    {
+        if (!GameManager._instance.isGameRunning)
+            return;
+
+        MoveBall();
     }
 
     void MoveBall()

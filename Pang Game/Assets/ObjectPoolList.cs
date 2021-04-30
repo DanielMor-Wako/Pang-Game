@@ -45,7 +45,7 @@ public class ObjectPoolList : MonoBehaviour
 
     public GameObject SpawnObject(string prefab, Vector2 pos)
     {
-        if (objectsList.Length <= 0)
+        if (objectsList.Length <= 0 || prefab == BallPop.BallPrefab.None.ToString())
             return null;
 
         ObjectPool relevantPool = GetRelevantPool(prefab);
@@ -57,7 +57,7 @@ public class ObjectPoolList : MonoBehaviour
         }
         else
         {
-            Debug.Log("no object to spawn ");
+            Debug.Log("no object to spawn");
             return null;
         }
     }

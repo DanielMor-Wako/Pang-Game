@@ -36,6 +36,9 @@ public class CharacterController2D : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (!GameManager._instance.isGameRunning)
+            return;
+
         MovePlayer();
     }
     
