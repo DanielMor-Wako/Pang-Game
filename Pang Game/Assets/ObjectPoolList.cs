@@ -52,7 +52,7 @@ public class ObjectPoolList : MonoBehaviour
         if (relevantPool != null)
         {
             GameObject newObject = relevantPool.SpawnObject(pos);
-            Debug.Log("Spawning " + newObject.tag+" on "+pos);
+            if (newObject != null) { Debug.Log("Spawning " + newObject.tag+" on "+pos); }
             return newObject;
         }
         else

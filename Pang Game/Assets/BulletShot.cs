@@ -37,8 +37,8 @@ public class BulletShot : MonoBehaviour
 
         if (isTouchingAnyBall)
         {
-            Debug.Log("ball & shot destroyed");
             coll.GetComponent<BallPop>()?.PopBall();
+            gameObject.SetActive(false);
         }
         else if (coll.tag == "Ceil")
             gameObject.SetActive(false);

@@ -191,7 +191,12 @@ public class GameManager : MonoBehaviour
 
         StartIncomingLevelAnimation();
         yield return new WaitForSeconds(1f);
-        
+
+        // spawned player
+
+        // spawn balls
+        // change ball xDirection using SetBallxDirection()
+
         Debug.Log("LevelSpawner(" + incomingLevel.LevelID + ") Ended ");
     }
     
