@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CharacterWeapon : MonoBehaviour
 {
+    ControllerID myID;
     PlayerInput playerInput;
     CharacterController2D controller;
 
@@ -24,6 +25,9 @@ public class CharacterWeapon : MonoBehaviour
 
     void InitVars()
     {
+        if (myID == null)
+            myID = GetComponent<ControllerID>();
+
         if (playerInput == null)
             playerInput = Object.FindObjectOfType<PlayerInput>();
 
@@ -35,11 +39,15 @@ public class CharacterWeapon : MonoBehaviour
 
     void FixedUpdate()
     {
-        float yMove = playerInput.GetPlayerYInput();
+        float yMove = 0;
+
+        if (myID.ID == 1)
+            yMove = playerInput.GetPlayer1YInput();
+        else if (myID.ID == 2)
+            yMove = playerInput.GetPlayer2YInput();
+        
         if (yMove > 0)
-        {
             ShootWeapon();
-        }
     }
 
     bool IsShootingAllowed()

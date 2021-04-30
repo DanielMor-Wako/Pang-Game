@@ -4,34 +4,54 @@ using UnityEngine;
 public class PlayerInput : MonoBehaviour
 {
     // init player vars
-    [SerializeField] Vector2 XYMovement;
+    [Header("Player 1")]
+    [SerializeField] Vector2 XYMovement1;
+    [Header("Player 2")]
+    [SerializeField] Vector2 XYMovement2;
     private Vector2 newInput;
     
     void Awake() => InitVars();
 
     void InitVars()
     {
-        XYMovement = Vector2.zero;
+        XYMovement1 = Vector2.zero;
+        XYMovement2 = Vector2.zero;
     }
 
     // Update is called once per frame
     void Update()
     {
+        // update player 1 input
         float xMove = Input.GetAxisRaw("Horizontal");
         float yMove = Input.GetAxisRaw("Vertical");
-
-        Vector2 prevInput = newInput;
+        
         newInput = new Vector2(xMove, yMove);
 
-        XYMovement = newInput;
+        XYMovement1 = newInput;
+
+        // update player 2 input
+        xMove = Input.GetAxisRaw("Horizontal2");
+        yMove = Input.GetAxisRaw("Vertical2");
+        
+        newInput = new Vector2(xMove, yMove);
+
+        XYMovement2 = newInput;
     }
 
-    public float GetPlayerXInput()
+    public float GetPlayer1XInput()
     {
-        return XYMovement.x;
+        return XYMovement1.x;
     }
-    public float GetPlayerYInput()
+    public float GetPlayer1YInput()
     {
-        return XYMovement.y;
+        return XYMovement1.y;
+    }
+    public float GetPlayer2XInput()
+    {
+        return XYMovement2.x;
+    }
+    public float GetPlayer2YInput()
+    {
+        return XYMovement2.y;
     }
 }

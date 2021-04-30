@@ -8,6 +8,7 @@ public class CharacterController2D : MonoBehaviour
     [SerializeField] float speed = 5f;
     [SerializeField] float maxVelocity = 5f;
 
+    ControllerID myID;
     PlayerInput playerInput;
     Rigidbody2D m_Rigidbody;
     // TODO 
@@ -23,6 +24,9 @@ public class CharacterController2D : MonoBehaviour
     {
         if (m_Rigidbody == null)
             m_Rigidbody = GetComponent<Rigidbody2D>();
+
+        if (myID == null)
+            myID = GetComponent<ControllerID>();
 
         if (playerInput == null)
             playerInput = Object.FindObjectOfType<PlayerInput>();
@@ -40,7 +44,11 @@ public class CharacterController2D : MonoBehaviour
         float force = 0f;
         float velocity = Mathf.Abs(m_Rigidbody.velocity.x);
 
-        float xMove = playerInput.GetPlayerXInput();
+        float xMove = 0;
+        if (myID.ID == 1)
+            xMove = playerInput.GetPlayer1XInput();
+        else if (myID.ID == 2)
+            xMove = playerInput.GetPlayer2XInput();
         
         if (b_canMove)
         {
