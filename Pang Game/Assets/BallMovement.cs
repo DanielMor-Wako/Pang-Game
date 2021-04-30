@@ -40,7 +40,7 @@ public class BallMovement : MonoBehaviour
         switch (this.gameObject.tag)
         {
             case "BallSize_6":
-                ySpeed = 12f;
+                ySpeed = 11f;
                 break;
 
             case "BallSize_5":
