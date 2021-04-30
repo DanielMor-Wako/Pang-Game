@@ -243,6 +243,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26ae699545d0c684888d1a3f430b929e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  score: 0
+  LevelsList:
+  - LevelID: 0
+    TimerCountdown: 0
+    Player1SpawnPoint: {fileID: 0}
+    Player2SpawnPoint: {fileID: 0}
+    Balls:
+    - BallSpawnPoint: {fileID: 0}
+      BallSize: 3
+      BallInitialDirection: 1
 --- !u!4 &340141103 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7972745564289732393, guid: 07e3f4e842fdbec42a767834427b02e9,
