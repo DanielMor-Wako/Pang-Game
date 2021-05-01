@@ -199,6 +199,7 @@ public class GameManager : MonoBehaviour
     public void NotifyBallPopped(string ballTag)
     {
         Debug.Log(ballTag + " has poped");
+        AppModel._instance.game.ballsLeft --;
         bool noBallsLeft = isLevelComplete();
         if (noBallsLeft)
             LevelComplete();
@@ -213,7 +214,7 @@ public class GameManager : MonoBehaviour
     }
     public void LevelComplete()
     {
-
+        StartNextLevel();
     }
     public bool isGameOver()
     {
@@ -238,8 +239,8 @@ public class GameManager : MonoBehaviour
     public void StartNextLevel()
     {
         Debug.Log("Start next level");
-        AppModel._instance.game.currentLevel++;
-        StartNewGame(AppModel._instance.game.totalPlayers);
+        AppModel._instance.game.currentLevel ++;
+        StartLevel(AppModel._instance.game.currentLevel);
     }
     public void AbandonGame()
     {
@@ -343,12 +344,13 @@ public class GameManager : MonoBehaviour
         // change background
         //backgroundImage.SwitchToSprite(level);
         // generate level
+        int totalBallsCount = 0;
         List<BallMovement> NewBallsList = new List<BallMovement>();
         for (int i=0; i < incomingLevel.Balls.Length; i++)
         {
             // spawn balls
             GameObject NewBall = ObjectPoolList._instance.SpawnObject(incomingLevel.Balls[i].BallSize.ToString(), incomingLevel.Balls[i].BallSpawnPoint.position);
-            // change ball xDirection
+            // change ball properties
             BallMovement NewBallScript = NewBall.GetComponent<BallMovement>();
             if (NewBallScript != null)
             {
@@ -356,11 +358,14 @@ public class GameManager : MonoBehaviour
                 NewBallScript.SetBallxDirection(incomingLevel.Balls[i].BallInitialDirection);
                 NewBallScript.m_Rigidbody.simulated = false;
                 NewBallsList.Add( NewBallScript );
-                
             }
+            // add ball as collective sum of inner balls to calculate total balls count in the level
+            totalBallsCount += GetTotalBallsCountBySize(incomingLevel.Balls[i].BallSize);
         }
+        // saves the level's total balls count to check against win condition
+        AppModel._instance.game.ballsLeft = totalBallsCount;
 
-        float DelayBeforeLevelStarts = 2f;
+        float DelayBeforeLevelStarts = 3f;
         StartIncomingLevelAnimation(true, DelayBeforeLevelStarts);
 
         yield return new WaitForSeconds(DelayBeforeLevelStarts);
@@ -377,7 +382,39 @@ public class GameManager : MonoBehaviour
 
         Debug.Log("LevelSpawner(" + incomingLevel.LevelID + ") Ended ");
     }
-    
+    private int GetTotalBallsCountBySize(BallModel.BallPrefab ballsize)
+    {
+        int totalCount = 0;
+
+        switch (ballsize)
+        {
+            case BallModel.BallPrefab.BallSize_1:
+                totalCount = 1;
+                break;
+
+            case BallModel.BallPrefab.BallSize_2:
+                totalCount = 3;
+                break;
+
+            case BallModel.BallPrefab.BallSize_3:
+                totalCount = 7;
+                break;
+
+            case BallModel.BallPrefab.BallSize_4:
+                totalCount = 15;
+                break;
+
+            case BallModel.BallPrefab.BallSize_5:
+                totalCount = 31;
+                break;
+
+            case BallModel.BallPrefab.BallSize_6:
+                totalCount = 63;
+                break;
+
+        }
+        return totalCount;
+    }
     private void StartIncomingLevelAnimation(bool activate, float countdown)
     {
         if (uiMenuManager == null)
@@ -389,11 +426,11 @@ public class GameManager : MonoBehaviour
         LoadingLevelScreen.gameObject.SetActive(activate);
     }
 
+    // player score
     public int GetScore()
     {
         return AppModel._instance.game.score;
     }
-    
     public void AddScore(int increment)
     {
         AppModel._instance.game.score += increment;

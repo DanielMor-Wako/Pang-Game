@@ -635,9 +635,9 @@ MonoBehaviour:
     Player2SpawnPoint: {fileID: 1580675105}
     Balls:
     - BallSpawnPoint: {fileID: 1368123227}
-      BallSize: 4
+      BallSize: 3
       BallInitialDirection: 0
-    BallsXspeed: 3
+    BallsXspeed: 2.5
   - LevelID: 2
     TimerCountdown: 40
     Player1SpawnPoint: {fileID: 788027041}

@@ -51,7 +51,7 @@ public class BallMovement : MonoBehaviour
                 break;
 
             case "BallSize_1":
-                ySpeed = 7f;
+                ySpeed = 7.5f;
                 break;
 
         }
