@@ -112,7 +112,6 @@ public class GameManager : MonoBehaviour
             bool allowShooting = IsShootingAllowed(PlayerID);
             if (allowShooting)
             {
-                Debug.Log("shooting allowed for p "+PlayerID);
                 // shoot the active weapon of the player
                 StartPlayerShooting(PlayerID);
             }
@@ -186,13 +185,17 @@ public class GameManager : MonoBehaviour
         AppModel._instance.player[PlayerID].b_canShoot = true;
     }
     
-    public void PlayerDied(int PlayerID)
+    public void NotifyPlayerDied(int PlayerID)
     {
         AppModel._instance.player[PlayerID].lives = 0;
         AppModel._instance.game.playersAlive--;
         bool noPlayersLeft = isGameOver();
         if (noPlayersLeft)
             GameOver();
+    }
+    public void NotifyBallPopped(string ballTag)
+    {
+        Debug.Log(ballTag + " has poped");
     }
 
     public bool isGameOver()
@@ -342,6 +345,7 @@ public class GameManager : MonoBehaviour
             BallMovement NewBallScript = NewBall.GetComponent<BallMovement>();
             if (NewBallScript != null)
             {
+                NewBallScript.SetBallSpeed(); // this sets the internall vector2 'velo' that moves the ball to the current level speed
                 NewBallScript.SetBallxDirection(incomingLevel.Balls[i].BallInitialDirection);
                 NewBallScript.m_Rigidbody.simulated = false;
                 NewBallsList.Add( NewBallScript );

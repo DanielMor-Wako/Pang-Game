@@ -57,6 +57,6 @@ public class CharacterController2D : MonoBehaviour
 
         gameObject.SetActive(false);
 
-        GameManager._instance.PlayerDied(ID);
+        GameManager._instance.NotifyPlayerDied(ID);
     }
 }

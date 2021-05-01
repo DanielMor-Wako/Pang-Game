@@ -637,7 +637,7 @@ MonoBehaviour:
     - BallSpawnPoint: {fileID: 1368123227}
       BallSize: 4
       BallInitialDirection: 0
-      BallSpeed: 5
+    BallsXspeed: 3
   - LevelID: 2
     TimerCountdown: 40
     Player1SpawnPoint: {fileID: 788027041}
@@ -646,11 +646,10 @@ MonoBehaviour:
     - BallSpawnPoint: {fileID: 1368123227}
       BallSize: 2
       BallInitialDirection: 1
-      BallSpeed: 5
     - BallSpawnPoint: {fileID: 1368123227}
       BallSize: 2
       BallInitialDirection: -1
-      BallSpeed: 5
+    BallsXspeed: 3
   - LevelID: 3
     TimerCountdown: 40
     Player1SpawnPoint: {fileID: 1930477376}
@@ -659,15 +658,13 @@ MonoBehaviour:
     - BallSpawnPoint: {fileID: 1368123227}
       BallSize: 3
       BallInitialDirection: 0
-      BallSpeed: 2
     - BallSpawnPoint: {fileID: 1368123227}
       BallSize: 2
       BallInitialDirection: 1
-      BallSpeed: 5
     - BallSpawnPoint: {fileID: 1368123227}
       BallSize: 2
       BallInitialDirection: -1
-      BallSpeed: 5
+    BallsXspeed: 3
   - LevelID: 4
     TimerCountdown: 30
     Player1SpawnPoint: {fileID: 1801238800}
@@ -676,15 +673,13 @@ MonoBehaviour:
     - BallSpawnPoint: {fileID: 2113956678}
       BallSize: 2
       BallInitialDirection: -1
-      BallSpeed: 5
     - BallSpawnPoint: {fileID: 1368123227}
       BallSize: 5
       BallInitialDirection: 0
-      BallSpeed: 3
     - BallSpawnPoint: {fileID: 1312581782}
       BallSize: 2
       BallInitialDirection: 1
-      BallSpeed: 5
+    BallsXspeed: 4
   - LevelID: 5
     TimerCountdown: 30
     Player1SpawnPoint: {fileID: 1801238800}
@@ -693,15 +688,13 @@ MonoBehaviour:
     - BallSpawnPoint: {fileID: 1312581782}
       BallSize: 5
       BallInitialDirection: 0
-      BallSpeed: 5
     - BallSpawnPoint: {fileID: 2120963607}
       BallSize: 2
       BallInitialDirection: 1
-      BallSpeed: 6
     - BallSpawnPoint: {fileID: 2120963607}
       BallSize: 1
       BallInitialDirection: -1
-      BallSpeed: 6
+    BallsXspeed: 4
   - LevelID: 6
     TimerCountdown: 20
     Player1SpawnPoint: {fileID: 1801238800}
@@ -710,19 +703,16 @@ MonoBehaviour:
     - BallSpawnPoint: {fileID: 2113956678}
       BallSize: 2
       BallInitialDirection: 1
-      BallSpeed: 5
     - BallSpawnPoint: {fileID: 2120963607}
       BallSize: 2
       BallInitialDirection: 0
-      BallSpeed: 5
     - BallSpawnPoint: {fileID: 1827221247}
       BallSize: 2
       BallInitialDirection: 0
-      BallSpeed: 5
     - BallSpawnPoint: {fileID: 1312581782}
       BallSize: 2
       BallInitialDirection: -1
-      BallSpeed: 5
+    BallsXspeed: 5
 --- !u!1 &261208001
 GameObject:
   m_ObjectHideFlags: 0

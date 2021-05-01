@@ -5,7 +5,7 @@ using UnityEngine;
 public class BallMovement : MonoBehaviour
 {
     public Rigidbody2D m_Rigidbody;
-    public Vector2 speed;
+    public Vector2 velo; // stored reference for ball velocity
 
     [Range(-1, 1)] [SerializeField] private int xDirection;
 
@@ -20,12 +20,12 @@ public class BallMovement : MonoBehaviour
         SetBallSpeed();
     }
 
-    void SetBallSpeed()
+    public void SetBallSpeed()
     {
         // sets ball speed on initilization
         // horizontal as fixed float
         // vertical speed varied based on the ball size
-        float xSpeed = 3f;
+        float xSpeed = AppModel._instance.levels[AppModel._instance.game.currentLevel].BallsXspeed;
         float ySpeed = 0f;
 
         switch (this.gameObject.tag)
@@ -56,7 +56,7 @@ public class BallMovement : MonoBehaviour
 
         }
 
-        speed = new Vector2(xSpeed, ySpeed);
+        velo = new Vector2(xSpeed, ySpeed);
     }
 
     // This function gives initial jump to the ball,
@@ -86,14 +86,14 @@ public class BallMovement : MonoBehaviour
 
         // moving the transform.position based on the our set xDirection(-1,0,1) * by speed.x
         Vector3 newPos = m_Rigidbody.position;
-        newPos.x += (speed.x * xDirection) * Time.deltaTime;
+        newPos.x += (velo.x * xDirection) * Time.deltaTime;
         m_Rigidbody.position = newPos;
     }
 
     private void OnTriggerEnter2D(Collider2D coll)
     {
         if (coll.tag == "Ground")
-            m_Rigidbody.velocity = new Vector2(0, speed.y);
+            m_Rigidbody.velocity = new Vector2(0, velo.y);
         else if (coll.tag == "Player")
         {
             CharacterController2D controller = coll.GetComponent<CharacterController2D>();

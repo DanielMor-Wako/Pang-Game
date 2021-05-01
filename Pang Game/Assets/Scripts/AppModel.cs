@@ -94,6 +94,7 @@ public class LevelsModel
     public float TimerCountdown = 20.0f;
     public Transform Player1SpawnPoint, Player2SpawnPoint;
     public BallModel[] Balls;
+    [Range(2, 10)] public float BallsXspeed = 5f; // this moves the ball on x axis, faster rate increases the difficulty
 
     public LevelsModel
         (
@@ -101,7 +102,8 @@ public class LevelsModel
         float TimerCountdown,
         Transform Player1SpawnPoint,
         Transform Player2SpawnPoint,
-        BallModel[] Balls
+        BallModel[] Balls,
+        float BallsXspeed
         )
     {
         this.LevelID = LevelID;
@@ -109,6 +111,7 @@ public class LevelsModel
         this.Player1SpawnPoint = Player1SpawnPoint;
         this.Player2SpawnPoint = Player2SpawnPoint;
         this.Balls = Balls;
+        this.BallsXspeed = BallsXspeed;
     }
 }
 
@@ -118,7 +121,6 @@ public class BallModel
     public Transform BallSpawnPoint;
     public BallPop.BallPrefab BallSize;
     [Range(-1, 1)] public int BallInitialDirection;
-    public float BallSpeed = 5f; // this moves the ball on x axis, faster rate increases the difficulty
 
     public BallModel
         (

@@ -17,7 +17,7 @@ public class BallPop : MonoBehaviour
 
     public void PopBall()
     {
-        Debug.Log(gameObject.tag+" has poped");
+        GameManager._instance.NotifyBallPopped(gameObject.tag);
 
         GameObject LeftBall = ObjectPoolList._instance.SpawnObject(nextPrefabOnPop.ToString(), transform.position);
         GameObject RightBall = ObjectPoolList._instance.SpawnObject(nextPrefabOnPop.ToString(), transform.position);
