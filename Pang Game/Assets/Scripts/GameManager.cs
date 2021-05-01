@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
@@ -41,6 +42,9 @@ public class GameManager : MonoBehaviour
     private Camera cam;
     private UiMenusManager uiMenuManager;
 
+    public UnityEvent m_PauseEvent = new UnityEvent();
+    public UnityEvent m_UnPauseEvent = new UnityEvent();
+
     private void Awake()
     {
         #region SINGLETON PATTERN
@@ -67,6 +71,12 @@ public class GameManager : MonoBehaviour
 
         if (uiMenuManager == null)
             uiMenuManager = GetComponent<UiMenusManager>();
+
+        if (m_PauseEvent == null)
+            m_PauseEvent = new UnityEvent();
+
+        if (m_UnPauseEvent == null)
+            m_UnPauseEvent = new UnityEvent();
 
         // these refer as reference string for the players to initiate shots,
         // it needs to be called again if a player has changed its weapon
@@ -223,7 +233,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("isGameOver = " + result);
         return result;
     }
-    private void GameOver()
+    public void GameOver()
     {
         Debug.Log("Game Over");
         uiMenuManager.Activate("mainMenu");
@@ -242,10 +252,6 @@ public class GameManager : MonoBehaviour
         AppModel._instance.game.currentLevel ++;
         StartLevel(AppModel._instance.game.currentLevel);
     }
-    public void AbandonGame()
-    {
-        Debug.Log("Stop Game");
-    }
     public void QuitApp()
     {
         Application.Quit();
@@ -254,16 +260,36 @@ public class GameManager : MonoBehaviour
     {
         if (activate)
         {
-            // Pause the game
-            Debug.Log("Pause Game");
+            // Pause the game , when user is in mid game
+            if (isGameRunning)
+            {
+                uiMenuManager.Activate("pauseMenu");
+                m_PauseEvent?.Invoke();
+                // setting timescale to 0, it is restored to 1 when UnpauseCounter Coroutine ends
+                Time.timeScale = 0f;
+            }
         }
         else
         {
             // Unpause the game
-            Debug.Log("Unpause Game");
+            uiMenuManager.Clear();
+            StartCoroutine(UnPauseCounter());
         }
     }
-    
+    IEnumerator UnPauseCounter()
+    {
+        isGameRunning = false;
+        Time.timeScale = 1f;
+        float DelayBeforeLevelStarts = 2f;
+        StartIncomingLevelAnimation(true, DelayBeforeLevelStarts);
+
+        yield return new WaitForSeconds(DelayBeforeLevelStarts);
+
+        StartIncomingLevelAnimation(false, 0f);
+        isGameRunning = true;
+        m_UnPauseEvent?.Invoke();
+    }
+
     // Access data for the next loaded level
     public void StartLevel(int newLvl)
     {

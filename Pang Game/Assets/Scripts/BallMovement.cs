@@ -10,8 +10,7 @@ public class BallMovement : MonoBehaviour
     [Range(-1, 1)] [SerializeField] private int xDirection;
 
     void Awake() => InitVars();
-
-
+    
     void InitVars()
     {
         if (m_Rigidbody == null)
@@ -57,6 +56,29 @@ public class BallMovement : MonoBehaviour
         }
 
         velo = new Vector2(xSpeed, ySpeed);
+    }
+
+    // listen to pause and unpause events
+    // and stops simulation of the ball when pause is active
+
+    private void OnEnable()
+    {
+        GameManager._instance.m_PauseEvent.AddListener(pauseBall);
+        GameManager._instance.m_UnPauseEvent.AddListener(unpauseBall);
+    }
+    private void OnDisable()
+    {
+        GameManager._instance.m_PauseEvent.AddListener(pauseBall);
+        GameManager._instance.m_UnPauseEvent.AddListener(unpauseBall);
+    }
+
+    void pauseBall()
+    {
+        m_Rigidbody.simulated = false;
+    }
+    void unpauseBall()
+    {
+        m_Rigidbody.simulated = true;
     }
 
     // This function gives initial jump to the ball,
