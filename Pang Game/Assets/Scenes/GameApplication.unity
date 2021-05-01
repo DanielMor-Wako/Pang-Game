@@ -610,7 +610,7 @@ MonoBehaviour:
     b_canShoot: 1
     weapon:
       activeWeapon: 1
-      maxActiveShots: 1
+      maxActiveShots: 2
       maxStickTime: 0
   - playerPrefab: {fileID: 5161280270879678546, guid: 59b7fcd3bfe4d7b48b5add171f452fb9,
       type: 3}
@@ -623,7 +623,7 @@ MonoBehaviour:
     b_canShoot: 1
     weapon:
       activeWeapon: 1
-      maxActiveShots: 1
+      maxActiveShots: 2
       maxStickTime: 0
   game:
     currentLevel: 0
@@ -641,7 +641,7 @@ MonoBehaviour:
     Player2SpawnPoint: {fileID: 1580675105}
     Balls:
     - BallSpawnPoint: {fileID: 1368123227}
-      BallSize: 3
+      BallSize: 2
       BallInitialDirection: 0
     BallsXspeed: 2.5
   - LevelID: 2
@@ -2651,8 +2651,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 15.0000305, y: -96}
-  m_SizeDelta: {x: 0, y: -119.83936}
+  m_AnchoredPosition: {x: -5.6099854, y: -89.58}
+  m_SizeDelta: {x: -11.223114, y: -179.16824}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &847927969
 MonoBehaviour:
@@ -2700,14 +2700,14 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 33.4
-  m_fontSizeBase: 33.4
+  m_fontSize: 25
+  m_fontSizeBase: 25
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 4
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -5543,7 +5543,7 @@ GameObject:
   - component: {fileID: 1960721281}
   - component: {fileID: 1960721280}
   m_Layer: 0
-  m_Name: Loading Complete
+  m_Name: Level Complete
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

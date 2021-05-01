@@ -180,8 +180,6 @@ public class GameManager : MonoBehaviour
     {
         AppModel._instance.player[PlayerID].b_canShoot = false;
         AppModel._instance.player[PlayerID].b_canMove = false;
-        //string weaponPoolName = "Player" + (PlayerID + 1) + AppModel._instance.player[PlayerID].weapon.activeWeapon.ToString();
-        //activeWeaponPool = ObjectPoolList._instance.GetRelevantPool(weaponPoolName);
         string weaponPoolName = GetPlayerWeaponPool(PlayerID);
         Vector2 newPos = GetPlayerPos(PlayerID);
         ObjectPoolList._instance.SpawnObject(weaponPoolName, newPos);
@@ -224,8 +222,30 @@ public class GameManager : MonoBehaviour
     }
     public void LevelComplete()
     {
+        StartCoroutine(LevelCompleteCounter());
+    }
+    IEnumerator LevelCompleteCounter()
+    {
+        float DelayAfterLevelComplete = 2f;
+        StartLevelCompleteAnimation(true, DelayAfterLevelComplete);
+        
+        yield return new WaitForSeconds(DelayAfterLevelComplete);
+
+        StartLevelCompleteAnimation(false, 0f);
+
         StartNextLevel();
     }
+    private void StartLevelCompleteAnimation(bool activate, float countdown)
+    {
+        if (uiMenuManager == null)
+            return;
+
+        LoadingLevelUpdater CompleteLevelScreen = uiMenuManager.levelComplete.GetComponent<LoadingLevelUpdater>();
+        CompleteLevelScreen.LevelLoaderDisplay(AppModel._instance.game.currentLevel, countdown);
+        CompleteLevelScreen.countdown = countdown;
+        CompleteLevelScreen.gameObject.SetActive(activate);
+    }
+
     public bool isGameOver()
     {
         bool result;
