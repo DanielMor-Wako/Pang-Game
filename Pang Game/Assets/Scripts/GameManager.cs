@@ -199,9 +199,22 @@ public class GameManager : MonoBehaviour
     public void NotifyBallPopped(string ballTag)
     {
         Debug.Log(ballTag + " has poped");
+        bool noBallsLeft = isLevelComplete();
+        if (noBallsLeft)
+            LevelComplete();
     }
 
     // Game states
+    public bool isLevelComplete()
+    {
+        bool result;
+        result = AppModel._instance.game.ballsLeft <= 0;
+        return result;
+    }
+    public void LevelComplete()
+    {
+
+    }
     public bool isGameOver()
     {
         bool result;
@@ -347,7 +360,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        float DelayBeforeLevelStarts = 3f;
+        float DelayBeforeLevelStarts = 2f;
         StartIncomingLevelAnimation(true, DelayBeforeLevelStarts);
 
         yield return new WaitForSeconds(DelayBeforeLevelStarts);

@@ -119,13 +119,15 @@ public class LevelsModel
 public class BallModel
 {
     public Transform BallSpawnPoint;
-    public BallPop.BallPrefab BallSize;
+
+    public enum BallPrefab { None, BallSize_1, BallSize_2, BallSize_3, BallSize_4, BallSize_5, BallSize_6 }
+    public BallPrefab BallSize;
     [Range(-1, 1)] public int BallInitialDirection;
 
     public BallModel
         (
         Transform BallSpawnPoint,
-        BallPop.BallPrefab BallSize,
+        BallPrefab BallSize,
         int BallInitialDirection
         )
     {
