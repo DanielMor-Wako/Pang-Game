@@ -190,6 +190,7 @@ public class GameManager : MonoBehaviour
         AppModel._instance.player[PlayerID].b_canMove = false;
         string weaponPoolName = GetPlayerWeaponPool(PlayerID);
         Vector2 newPos = GetPlayerPos(PlayerID);
+        newPos.y += 0.5f;
         ObjectPoolList._instance.SpawnObject(weaponPoolName, newPos);
 
         // wait the shooting delay time and then continue
