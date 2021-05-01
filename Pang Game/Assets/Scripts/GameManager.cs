@@ -77,13 +77,16 @@ public class GameManager : MonoBehaviour
 
         if (m_UnPauseEvent == null)
             m_UnPauseEvent = new UnityEvent();
+    }
 
+    private void Start()
+    {
         // these refer as reference string for the players to initiate shots,
         // it needs to be called again if a player has changed its weapon
         player1_weaponPool = "Player1" + AppModel._instance.player[0].weapon.activeWeapon.ToString();
         player2_weaponPool = "Player2" + AppModel._instance.player[1].weapon.activeWeapon.ToString();
     }
-    
+
     // Player Inputs and output to modal.view
     private void FixedUpdate()
     {
