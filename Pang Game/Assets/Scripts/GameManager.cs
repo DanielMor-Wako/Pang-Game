@@ -42,8 +42,10 @@ public class GameManager : MonoBehaviour
     private Camera cam;
     private UiMenusManager uiMenuManager;
 
-    public UnityEvent m_PauseEvent = new UnityEvent();
-    public UnityEvent m_UnPauseEvent = new UnityEvent();
+    [HideInInspector] public UnityEvent m_PauseEvent = new UnityEvent();
+    [HideInInspector] public UnityEvent m_UnPauseEvent = new UnityEvent();
+
+    private BgSpriteSwitch backgroundImage;
 
     private void Awake()
     {
@@ -71,6 +73,9 @@ public class GameManager : MonoBehaviour
 
         if (uiMenuManager == null)
             uiMenuManager = GetComponent<UiMenusManager>();
+
+        if (backgroundImage == null)
+            backgroundImage = Object.FindObjectOfType<BgSpriteSwitch>();
 
         if (m_PauseEvent == null)
             m_PauseEvent = new UnityEvent();
@@ -235,7 +240,8 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(DelayAfterLevelComplete);
 
         StartLevelCompleteAnimation(false, 0f);
-
+        // change background
+        backgroundImage.SwitchToNextSprite();
         StartNextLevel();
     }
     private void StartLevelCompleteAnimation(bool activate, float countdown)
@@ -390,8 +396,6 @@ public class GameManager : MonoBehaviour
             AppModel._instance.player[1].lives = 0;
         }
         AppModel._instance.game.CountdownLeft = incomingLevel.TimerCountdown;
-        // change background
-        //backgroundImage.SwitchToSprite(level);
         // generate level
         int totalBallsCount = 0;
         List<BallMovement> NewBallsList = new List<BallMovement>();
