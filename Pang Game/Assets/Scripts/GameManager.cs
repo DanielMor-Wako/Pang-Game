@@ -42,8 +42,10 @@ public class GameManager : MonoBehaviour
     private Camera cam;
     private UiMenusManager uiMenuManager;
 
-    public UnityEvent m_PauseEvent = new UnityEvent();
-    public UnityEvent m_UnPauseEvent = new UnityEvent();
+    [HideInInspector] public UnityEvent m_PauseEvent = new UnityEvent();
+    [HideInInspector] public UnityEvent m_UnPauseEvent = new UnityEvent();
+
+    private BgSpriteSwitch backgroundImage;
 
     private void Awake()
     {
@@ -72,18 +74,24 @@ public class GameManager : MonoBehaviour
         if (uiMenuManager == null)
             uiMenuManager = GetComponent<UiMenusManager>();
 
+        if (backgroundImage == null)
+            backgroundImage = Object.FindObjectOfType<BgSpriteSwitch>();
+
         if (m_PauseEvent == null)
             m_PauseEvent = new UnityEvent();
 
         if (m_UnPauseEvent == null)
             m_UnPauseEvent = new UnityEvent();
+    }
 
+    private void Start()
+    {
         // these refer as reference string for the players to initiate shots,
         // it needs to be called again if a player has changed its weapon
         player1_weaponPool = "Player1" + AppModel._instance.player[0].weapon.activeWeapon.ToString();
         player2_weaponPool = "Player2" + AppModel._instance.player[1].weapon.activeWeapon.ToString();
     }
-    
+
     // Player Inputs and output to modal.view
     private void FixedUpdate()
     {
@@ -182,6 +190,7 @@ public class GameManager : MonoBehaviour
         AppModel._instance.player[PlayerID].b_canMove = false;
         string weaponPoolName = GetPlayerWeaponPool(PlayerID);
         Vector2 newPos = GetPlayerPos(PlayerID);
+        newPos.y += 0.5f;
         ObjectPoolList._instance.SpawnObject(weaponPoolName, newPos);
 
         // wait the shooting delay time and then continue
@@ -232,7 +241,8 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(DelayAfterLevelComplete);
 
         StartLevelCompleteAnimation(false, 0f);
-
+        // change background
+        backgroundImage.SwitchToNextSprite();
         StartNextLevel();
     }
     private void StartLevelCompleteAnimation(bool activate, float countdown)
@@ -387,8 +397,6 @@ public class GameManager : MonoBehaviour
             AppModel._instance.player[1].lives = 0;
         }
         AppModel._instance.game.CountdownLeft = incomingLevel.TimerCountdown;
-        // change background
-        //backgroundImage.SwitchToSprite(level);
         // generate level
         int totalBallsCount = 0;
         List<BallMovement> NewBallsList = new List<BallMovement>();
