@@ -38,7 +38,6 @@ public class GameManager : MonoBehaviour
     private string player1_weaponPool;
     private string player2_weaponPool;
 
-    //[SerializeField] CharacterController2D controller;
     private Camera cam;
     private UiMenusManager uiMenuManager;
 
@@ -68,11 +67,14 @@ public class GameManager : MonoBehaviour
 
         if (uiMenuManager == null)
             uiMenuManager = GetComponent<UiMenusManager>();
-        
+
+        // these refer as reference string for the players to initiate shots,
+        // it needs to be called again if a player has changed its weapon
         player1_weaponPool = "Player1" + AppModel._instance.player[0].weapon.activeWeapon.ToString();
         player2_weaponPool = "Player2" + AppModel._instance.player[1].weapon.activeWeapon.ToString();
     }
-
+    
+    // Player Inputs and output to modal.view
     private void FixedUpdate()
     {
         // cancel moving characters when game is not running
@@ -95,7 +97,7 @@ public class GameManager : MonoBehaviour
                 CheckPlayerShooting(1);
         }
     }
-
+    // Player's shooting input
     private void CheckPlayerShooting(int PlayerID)
     {
         // get the input by the PlayeriD
@@ -141,7 +143,7 @@ public class GameManager : MonoBehaviour
 
         return result;
     }
-
+    // Deal with player's spawning of new shots by reference to objectpool component
     private string GetPlayerWeaponPool(int PlayerID)
     {
         if (PlayerID == 1)
@@ -185,6 +187,7 @@ public class GameManager : MonoBehaviour
         AppModel._instance.player[PlayerID].b_canShoot = true;
     }
     
+    // Notifications
     public void NotifyPlayerDied(int PlayerID)
     {
         AppModel._instance.player[PlayerID].lives = 0;
@@ -198,6 +201,7 @@ public class GameManager : MonoBehaviour
         Debug.Log(ballTag + " has poped");
     }
 
+    // Game states
     public bool isGameOver()
     {
         bool result;
@@ -245,17 +249,8 @@ public class GameManager : MonoBehaviour
             Debug.Log("Unpause Game");
         }
     }
-    public void PostHighscore(string username)
-    {
-        Debug.Log("posting high score for "+username);
-        //Highscores.AddNewHighscore(username, score);
-    }
-    public void OnHighscorePosted()
-    {
-        Debug.Log("posted high score");
-        //uiMenuManager.Activate("tophighscores");
-    }
     
+    // Access data for the next loaded level
     public void StartLevel(int newLvl)
     {
         //Debug.Log("Level starter " + newLvl + " is triggered");
@@ -291,8 +286,7 @@ public class GameManager : MonoBehaviour
         //StopCoroutine("LevelSpawner");
         StartCoroutine("LevelSpawner", LevelToLoad);
     }
-
-    // generating the level based on AppModel._instance.levels[LevelToLoad]
+    // Generating the level based on AppModel._instance.levels[LevelToLoad]
     IEnumerator LevelSpawner(int LevelID)
     {
         // load new game by the level index
@@ -391,5 +385,15 @@ public class GameManager : MonoBehaviour
     {
         AppModel._instance.game.score += increment;
         //scoreTxt.text = score.ToString();
+    }
+    public void PostHighscore(string username)
+    {
+        Debug.Log("posting high score for "+username);
+        //Highscores.AddNewHighscore(username, score);
+    }
+    public void OnHighscorePosted()
+    {
+        Debug.Log("posted high score");
+        //uiMenuManager.Activate("tophighscores");
     }
 }
