@@ -135,9 +135,8 @@ public class GameManager : MonoBehaviour
         Debug.Log("New Game");
         totalPlayers = playersCount;
         alivePlayers = totalPlayers;
-
-        currentLevel = 1;
-        StartLevel(currentLevel);
+        
+        StartLevel(AppModel._instance.game.currentLevel);
 }
     public void StartNextLevel()
     {
