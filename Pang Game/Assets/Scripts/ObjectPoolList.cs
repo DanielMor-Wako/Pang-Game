@@ -57,7 +57,7 @@ public class ObjectPoolList : MonoBehaviour
         }
         else
         {
-            Debug.Log("no object to spawn");
+            Debug.Log("no object to spawn by prefab: "+ prefab);
             return null;
         }
     }

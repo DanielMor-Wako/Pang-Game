@@ -3,7 +3,7 @@
 
 public class AppModel:MonoBehaviour
 {
-    public PlayerModel player;
+    public PlayerModel[] player;
     public GameModel game;
     public LevelsModel[] levels;
 
@@ -52,14 +52,16 @@ public class GameModel
 
     // player lose due to time restriction or when none players left
     [Range(1,2)] public int totalPlayers = 1;
-    public int playersLeft = 1;
-    public int CountdownLeft = 30;
+    public int playersAlive = 1;
+    public float CountdownLeft = 30;
     public int LoseCondition = 0; 
 }
 
 [System.Serializable]
 public class PlayerModel
 {
+    public GameObject playerPrefab;
+
     public float speed = 5f;
     public float maxVelocity = 5f;
     public int lives = 1;

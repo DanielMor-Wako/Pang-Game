@@ -96,7 +96,8 @@ public class BallMovement : MonoBehaviour
             m_Rigidbody.velocity = new Vector2(0, speed.y);
         else if (coll.tag == "Player")
         {
-            coll.GetComponent<CharacterController2D>().OnPlayerDeath();
+            CharacterController2D controller = coll.GetComponent<CharacterController2D>();
+            controller?.OnPlayerDeath();
             GetComponent<BallPop>()?.PopBall();
         }
         else if (coll.tag == "Shot")

@@ -9,9 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5161280270879678573}
-  - component: {fileID: 3843785216211716463}
   - component: {fileID: 5161280270879678575}
-  - component: {fileID: 3843785215262476727}
   - component: {fileID: 5161280270879678574}
   - component: {fileID: 5161280270879678572}
   m_Layer: 9
@@ -36,19 +34,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3843785216211716463
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5161280270879678546}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4b41d9ab4029ea44809af1fc3d8fb97, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ID: 2
 --- !u!114 &5161280270879678575
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,27 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8118044b79daaa342921ac0bc9db62f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  maxVelocity: 5
-  b_canMove: 0
-  m_moveDelay: 0.2
---- !u!114 &3843785215262476727
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5161280270879678546}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 021af182ff5bf0843ae0851a70522ebb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  activeWeapon: 1
-  maxActiveShots: 1
-  maxStickTime: 0
-  b_canShoot: 0
-  m_shootDelay: 0.5
+  ID: 1
 --- !u!50 &5161280270879678574
 Rigidbody2D:
   serializedVersion: 4

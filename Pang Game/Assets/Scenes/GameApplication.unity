@@ -288,7 +288,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 224004040}
         m_MethodName: StartNewGame
         m_Mode: 3
         m_Arguments:
@@ -480,6 +480,7 @@ GameObject:
   - component: {fileID: 224004038}
   - component: {fileID: 224004039}
   - component: {fileID: 224004040}
+  - component: {fileID: 224004041}
   m_Layer: 0
   m_Name: Controller
   m_TagString: Untagged
@@ -529,82 +530,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isGameRunning: 0
-  totalPlayers: 2
-  score: 0
   player1: {fileID: 931689713}
   player2: {fileID: 8284181600719398337}
-  LevelsList:
-  - LevelID: 1
-    TimerCountdown: 40
-    Player1SpawnPoint: {fileID: 1801238800}
-    Player2SpawnPoint: {fileID: 1580675105}
-    Balls:
-    - BallSpawnPoint: {fileID: 1368123227}
-      BallSize: 3
-      BallInitialDirection: 0
-  - LevelID: 2
-    TimerCountdown: 40
-    Player1SpawnPoint: {fileID: 1801238800}
-    Player2SpawnPoint: {fileID: 1580675105}
-    Balls:
-    - BallSpawnPoint: {fileID: 1368123227}
-      BallSize: 4
-      BallInitialDirection: 0
-    - BallSpawnPoint: {fileID: 2120963607}
-      BallSize: 2
-      BallInitialDirection: 1
-    - BallSpawnPoint: {fileID: 1827221247}
-      BallSize: 2
-      BallInitialDirection: -1
-  - LevelID: 3
-    TimerCountdown: 40
-    Player1SpawnPoint: {fileID: 1801238800}
-    Player2SpawnPoint: {fileID: 1580675105}
-    Balls:
-    - BallSpawnPoint: {fileID: 1368123227}
-      BallSize: 2
-      BallInitialDirection: 1
-    - BallSpawnPoint: {fileID: 2120963607}
-      BallSize: 2
-      BallInitialDirection: 1
-    - BallSpawnPoint: {fileID: 1312581782}
-      BallSize: 1
-      BallInitialDirection: 1
-  - LevelID: 4
-    TimerCountdown: 40
-    Player1SpawnPoint: {fileID: 1801238800}
-    Player2SpawnPoint: {fileID: 1801238800}
-    Balls:
-    - BallSpawnPoint: {fileID: 2113956678}
-      BallSize: 2
-      BallInitialDirection: 1
-    - BallSpawnPoint: {fileID: 2113956678}
-      BallSize: 2
-      BallInitialDirection: -1
-    - BallSpawnPoint: {fileID: 1312581782}
-      BallSize: 2
-      BallInitialDirection: 1
-    - BallSpawnPoint: {fileID: 1312581782}
-      BallSize: 2
-      BallInitialDirection: -1
-  - LevelID: 4
-    TimerCountdown: 40
-    Player1SpawnPoint: {fileID: 1801238800}
-    Player2SpawnPoint: {fileID: 1801238800}
-    Balls:
-    - BallSpawnPoint: {fileID: 2113956678}
-      BallSize: 2
-      BallInitialDirection: 1
-    - BallSpawnPoint: {fileID: 2113956678}
-      BallSize: 2
-      BallInitialDirection: -1
-    - BallSpawnPoint: {fileID: 1312581782}
-      BallSize: 2
-      BallInitialDirection: 1
-    - BallSpawnPoint: {fileID: 1312581782}
-      BallSize: 2
-      BallInitialDirection: -1
-  currentLevel: 0
+--- !u!114 &224004041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 224004037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe6ffa42960e17947960dfe98ab23da4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainMenu: {fileID: 1759086131}
+  pauseMenu: {fileID: 1645577005}
+  levelLoading: {fileID: 781900803}
+  levelComplete: {fileID: 1960721279}
+  tophighscores: {fileID: 1901488591}
 --- !u!1 &258958379
 GameObject:
   m_ObjectHideFlags: 0
@@ -649,12 +593,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player:
+  - playerPrefab: {fileID: 8284181599844640641, guid: 444a95b064a2feb489d76943e357416b,
+      type: 3}
     speed: 5
     maxVelocity: 5
     lives: 1
     m_moveDelay: 0.2
     b_canMove: 1
-    m_shootDelay: 0.5
+    m_shootDelay: 0.3
+    b_canShoot: 1
+    weapon:
+      activeWeapon: 1
+      maxActiveShots: 1
+      maxStickTime: 0
+  - playerPrefab: {fileID: 5161280270879678546, guid: 59b7fcd3bfe4d7b48b5add171f452fb9,
+      type: 3}
+    speed: 5
+    maxVelocity: 5
+    lives: 1
+    m_moveDelay: 0.2
+    b_canMove: 1
+    m_shootDelay: 0.3
     b_canShoot: 1
     weapon:
       activeWeapon: 1
@@ -666,7 +625,7 @@ MonoBehaviour:
     ballsLeft: 0
     winCondition: 0
     totalPlayers: 1
-    playersLeft: 1
+    playersAlive: 1
     CountdownLeft: 30
     LoseCondition: 0
   levels:
@@ -743,6 +702,27 @@ MonoBehaviour:
       BallSize: 1
       BallInitialDirection: -1
       BallSpeed: 6
+  - LevelID: 6
+    TimerCountdown: 20
+    Player1SpawnPoint: {fileID: 1801238800}
+    Player2SpawnPoint: {fileID: 1801238800}
+    Balls:
+    - BallSpawnPoint: {fileID: 2113956678}
+      BallSize: 2
+      BallInitialDirection: 1
+      BallSpeed: 5
+    - BallSpawnPoint: {fileID: 2120963607}
+      BallSize: 2
+      BallInitialDirection: 0
+      BallSpeed: 5
+    - BallSpawnPoint: {fileID: 1827221247}
+      BallSize: 2
+      BallInitialDirection: 0
+      BallSpeed: 5
+    - BallSpawnPoint: {fileID: 1312581782}
+      BallSize: 2
+      BallInitialDirection: -1
+      BallSpeed: 5
 --- !u!1 &261208001
 GameObject:
   m_ObjectHideFlags: 0
@@ -1022,7 +1002,7 @@ GameObject:
   - component: {fileID: 360110133}
   - component: {fileID: 360110132}
   m_Layer: 0
-  m_Name: Button (1)
+  m_Name: TwoPlayers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1091,7 +1071,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 224004040}
         m_MethodName: StartNewGame
         m_Mode: 3
         m_Arguments:
@@ -1840,7 +1820,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 224004040}
         m_MethodName: QuitApp
         m_Mode: 1
         m_Arguments:
@@ -2108,10 +2088,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1033958012}
     m_Modifications:
-    - target: {fileID: 957124196, guid: 444a95b064a2feb489d76943e357416b, type: 3}
-      propertyPath: maxActiveShots
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8284181599844640641, guid: 444a95b064a2feb489d76943e357416b,
         type: 3}
       propertyPath: m_Name
@@ -2263,9 +2239,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 135a7e44e82a42f4084f88ebf6f96527, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentLevel: 0
   LevelNumber: {fileID: 1859012010}
-  LoadingCountdown: {fileID: 296505328}
   countdown: 0
+  LoadingCountdown: {fileID: 296505328}
 --- !u!1 &788027040
 GameObject:
   m_ObjectHideFlags: 0
@@ -2415,7 +2392,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 15, y: -96}
+  m_AnchoredPosition: {x: 15.0000305, y: -96}
   m_SizeDelta: {x: 0, y: -119.83936}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &847927969
@@ -2905,9 +2882,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: AbandonGame
-        m_Mode: 1
+      - m_Target: {fileID: 224004040}
+        m_MethodName: StartNewGame
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3521,9 +3498,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: AbandonGame
-        m_Mode: 1
+      - m_Target: {fileID: 224004040}
+        m_MethodName: StartNewGame
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3578,7 +3555,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1171393657}
-  - component: {fileID: 1171393661}
   - component: {fileID: 1171393660}
   - component: {fileID: 1171393659}
   - component: {fileID: 1171393658}
@@ -3673,23 +3649,6 @@ Canvas:
   m_SortingLayerID: -1481932227
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!114 &1171393661
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1171393656}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe6ffa42960e17947960dfe98ab23da4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainMenu: {fileID: 1759086131}
-  pauseMenu: {fileID: 1645577005}
-  levelLoading: {fileID: 781900803}
-  levelComplete: {fileID: 1960721279}
-  tophighscores: {fileID: 1901488591}
 --- !u!1 &1312581781
 GameObject:
   m_ObjectHideFlags: 0
@@ -4332,8 +4291,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: StartNewGame
+      - m_Target: {fileID: 224004040}
+        m_MethodName: QuitApp
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4768,9 +4727,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: PauseMenu
-        m_Mode: 6
+      - m_Target: {fileID: 224004040}
+        m_MethodName: StartNewGame
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -5364,9 +5323,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 135a7e44e82a42f4084f88ebf6f96527, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentLevel: 0
   LevelNumber: {fileID: 1711713143}
-  LoadingCountdown: {fileID: 847927969}
   countdown: 0
+  LoadingCountdown: {fileID: 847927969}
 --- !u!114 &1960721281
 MonoBehaviour:
   m_ObjectHideFlags: 0
