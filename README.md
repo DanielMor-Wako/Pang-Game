@@ -12,7 +12,7 @@ Extra credits used on this assignment:
     decided to add a second player because coop is always fun and adds to the core gameplay.
     Moreover, it was bit challenging setting up the input system for 2 people on one device, without taking too much screen place
 4. Custom visuals and shaders -->
-    Added graphic art that would fit the gamestyle, however I did not yet add Shaders due to priorities
+    Added graphic art that would fit the gamestyle, however I did not yet add Shaders due to more important priorities
 
 Decided to disgard the following tasks:
 1. Leaderboards with player names supplied at the end of the game -->
