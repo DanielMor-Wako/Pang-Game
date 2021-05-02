@@ -915,8 +915,6 @@ MonoBehaviour:
   m_UnPauseEvent:
     m_PersistentCalls:
       m_Calls: []
-  popSound: {fileID: 8300000, guid: 84f9e2694ec07e441a4e5179ea3a5729, type: 3}
-  levelCompleteSound: {fileID: 8300000, guid: 94e4c1b69ff335f4f94685acc65b7b99, type: 3}
 --- !u!114 &224004041
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4025,6 +4023,17 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 224004040}
+        m_MethodName: PauseMenu
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 224004040}
         m_MethodName: GameOver
         m_Mode: 1

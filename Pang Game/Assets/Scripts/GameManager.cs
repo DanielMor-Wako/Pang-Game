@@ -215,7 +215,7 @@ public class GameManager : MonoBehaviour
     }
     public void NotifyBallPopped(string ballTag)
     {
-        Debug.Log(ballTag + " has poped");
+        //Debug.Log(ballTag + " has poped");
         AppModel._instance.game.ballsLeft --;
         bool noBallsLeft = isLevelComplete();
         if (noBallsLeft)
@@ -234,6 +234,7 @@ public class GameManager : MonoBehaviour
     }
     public void LevelComplete()
     {
+        StopCoroutine(UnPauseCounter());
         StartCoroutine(LevelCompleteCounter());
     }
     IEnumerator LevelCompleteCounter()
@@ -263,17 +264,18 @@ public class GameManager : MonoBehaviour
     {
         bool result;
         result = AppModel._instance.game.playersAlive <= 0;
-        Debug.Log("isGameOver = " + result);
+        //Debug.Log("isGameOver = " + result);
         return result;
     }
     public void GameOver()
     {
-        Debug.Log("Game Over");
+        //Debug.Log("Game Over");
         uiMenuManager.Activate("mainMenu");
+        ObjectPoolList._instance.DespawnAll();
     }
     public void StartNewGame(int playersCount)
     {
-        Debug.Log("New Game");
+        //Debug.Log("New Game");
         AppModel._instance.game.totalPlayers = playersCount;
         AppModel._instance.game.playersAlive = playersCount;
         AppModel._instance.game.currentLevel = 1;
@@ -281,7 +283,7 @@ public class GameManager : MonoBehaviour
 }
     public void StartNextLevel()
     {
-        Debug.Log("Start next level");
+        //Debug.Log("Start next level");
         AppModel._instance.game.currentLevel ++;
         StartLevel(AppModel._instance.game.currentLevel);
     }
@@ -343,25 +345,29 @@ public class GameManager : MonoBehaviour
 
         if (newLvl > AppModel._instance.levels.Length)
         {
-            Debug.Log("No More levels, Game is complete!");
+            //Debug.Log("No More levels, Game is complete!");
             return;
         }
 
         if (LevelToLoad < 0)
         {
-            Debug.Log("failed to find new Level data");
+            //Debug.Log("failed to find new Level data");
             return;
         }
 
         // clear all ui screens
         uiMenuManager.Clear();
 
-        //StopCoroutine("LevelSpawner");
+        StopCoroutine("UnPauseCounter");
+        StopCoroutine("LevelCompleteCounter");
+        StopCoroutine("LevelSpawner");
         StartCoroutine("LevelSpawner", LevelToLoad);
     }
     // Generating the level based on AppModel._instance.levels[LevelToLoad]
     IEnumerator LevelSpawner(int LevelID)
     {
+        Time.timeScale = 1;
+
         // load new game by the level index
         LevelsModel incomingLevel = AppModel._instance.levels[LevelID];
 
@@ -371,7 +377,7 @@ public class GameManager : MonoBehaviour
 
         // spawn player/s
         AppModel._instance.game.playersAlive = AppModel._instance.game.totalPlayers;
-        Debug.Log("new game with "+ AppModel._instance.game.totalPlayers+ " player");
+        //Debug.Log("new game with "+ AppModel._instance.game.totalPlayers+ " player");
         if (AppModel._instance.game.totalPlayers == 2)
         {
             // player 1 is active
@@ -424,9 +430,9 @@ public class GameManager : MonoBehaviour
 
         float DelayBeforeLevelStarts = 3f;
         StartIncomingLevelAnimation(true, DelayBeforeLevelStarts);
-
-        yield return new WaitForSeconds(DelayBeforeLevelStarts);
-
+        
+        yield return new WaitForSecondsRealtime(DelayBeforeLevelStarts);
+        
         StartIncomingLevelAnimation(false, 0f);
         isGameRunning = true;
         
@@ -437,7 +443,7 @@ public class GameManager : MonoBehaviour
             bm.InitialJump();
         }
 
-        Debug.Log("LevelSpawner(" + incomingLevel.LevelID + ") Ended ");
+        //Debug.Log("LevelSpawner(" + incomingLevel.LevelID + ") Ended ");
     }
     private int GetTotalBallsCountBySize(BallModel.BallPrefab ballsize)
     {
