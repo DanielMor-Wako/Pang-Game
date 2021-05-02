@@ -15,7 +15,7 @@ Extra credits used on this assignment:
     Added graphic art that would fit the gamestyle, however I did not yet add Shaders due to priorities
 
 Decided to disgard the following tasks:
-9. Leaderboards with player names supplied at the end of the game -->
+1. Leaderboards with player names supplied at the end of the game -->
     too early to add leaderboard for a prototype
-12. Custom soundtracks and SFX -->
-    Although I added a sound manager to the game, i could not find music that would fit.. and did not have time to produce one due to time limit
+2. Custom soundtracks and SFX -->
+    Although I added a sound manager to the game, i could not find music that would fit over the time limit.
