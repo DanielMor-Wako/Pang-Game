@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
 
     [HideInInspector] public UnityEvent m_PauseEvent = new UnityEvent();
     [HideInInspector] public UnityEvent m_UnPauseEvent = new UnityEvent();
-
+    
     private BgSpriteSwitch backgroundImage;
 
     private void Awake()
@@ -227,6 +227,9 @@ public class GameManager : MonoBehaviour
     {
         bool result;
         result = AppModel._instance.game.ballsLeft <= 0;
+        if (isGameOver() == true)
+            result = false;
+
         return result;
     }
     public void LevelComplete()
