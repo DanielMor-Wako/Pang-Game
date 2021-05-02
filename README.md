@@ -18,4 +18,4 @@ Decided to disgard the following tasks:
 1. Leaderboards with player names supplied at the end of the game -->
     too early to add leaderboard for a prototype
 2. Custom soundtracks and SFX -->
-    Although I added a sound manager to the game, i could not find music that would fit over the time limit.
+    Although I added a sound manager to the game, i could not find music that would fit the theme of the game over the time limit.
