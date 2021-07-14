@@ -1,7 +1,11 @@
 # Pang-Game
 Pang Game Prototype
 
-This Protoype has been build for Comunix by Daniel Mor
+This Protoype was developed in a couple of days by Daniel Mor
+
+Personal statement:
+In order to imporve the existing the prototype there is a need implement modular character structure, to assist adding new character features like different ammo or temporary boost with ease thru the development of the project.
+
 Extra credits used on this assignment:
 
 1. Architecture designed with MVC paradigm -->
